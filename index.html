@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shanlong Li</title>
+    <!-- Include NGL Viewer Dependency -->
+    <script src="https://unpkg.com/ngl@2.0.0-dev.37/dist/ngl.js"></script>
     <style>
         * {
             margin: 0;
@@ -36,7 +38,7 @@
         }
         
         .container {
-            width: 80%; /* Updated to dynamically scale to exactly 80% occupancy */
+            width: 80%;
             margin: 40px auto;
             padding: 0;
             display: grid;
@@ -213,6 +215,23 @@
             font-size: 1.1em;
             margin-bottom: 12px;
         }
+
+        /* --- Minimalist Trajectory Split View --- */
+        .trajectory-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .ngl-square-viewport {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
         
         .research-item {
             margin-bottom: 30px;
@@ -251,7 +270,6 @@
             font-size: 0.9em;
         }
         
-        /* Tablet: Maintain ratio, 85% width */
         @media (max-width: 1024px) {
             .container {
                 width: 85%;
@@ -259,12 +277,15 @@
             }
         }
         
-        /* Mobile: Stack vertically */
         @media (max-width: 768px) {
             .container {
                 width: 90%;
                 grid-template-columns: 1fr;
                 gap: 20px;
+            }
+            
+            .trajectory-container {
+                grid-template-columns: 1fr;
             }
             
             header h1 {
@@ -281,7 +302,6 @@
             }
         }
         
-        /* Small mobile */
         @media (max-width: 480px) {
             .container {
                 width: 95%;
@@ -307,7 +327,7 @@
 <body>
     <header>
         <h1>Computational Phase Physics</h1>
-        <p>understanding phase behaviors of biomolecules and polymers</p>
+        <p>understanding phase behaviors of soft matter</p>
     </header>
     
     <div class="container">
@@ -319,7 +339,7 @@
             </div>
             
             <div class="intro-text">
-                <p>Hi, I am Shanlong Li, postdoc in UMass Amherst. My research focuses on developing multi-scale computational methods to advance our understanding of the dynamics and interactions of biomolecules and polymers, including recognition, self-assembly, phase transitions, and aggregation.</p>
+                <p>Hi, I am Shanlong Li, postdoc in UMass Amherst. My research focuses on developing multi-scale computational methods to advance our understanding of the dynamics and interactions of bio- and designed macromolecules, including recognition, self-assembly, phase transitions, and aggregation. Welcome to my homepage.</p>
             </div>
             
             <div class="publications-section">
@@ -366,6 +386,12 @@
         
         <!-- Right Column -->
         <div class="right-column">
+            <!-- Square Viewport Windows Only -->
+            <div class="trajectory-container">
+                <div id="viewport1" class="ngl-square-viewport"></div>
+                <div id="viewport2" class="ngl-square-viewport"></div>
+            </div>
+
             <h2>Research Interests</h2>
             
             <div class="research-item">
@@ -379,15 +405,22 @@
                 <p>I investigate biomolecular condensates through computational modeling of phase separation in proteins and RNA. My work reveals the coupling between molecular structure and phase behavior, including the roles of folding, pairing, and competitive interactions in determining material properties.</p>
                 <img src="images/research2.png" alt="Biomolecular Condensation and Material Properties" class="research-image" width="100%">
             </div>
+
+            <!-- Inserted Third Section: Amyloid fibril fuzzy coat -->
+            <div class="research-item">
+                <h3>III. Amyloid Fibril Fuzzy Coat</h3>
+                <p>I investigate the structural dynamics and thermodynamic properties of the "fuzzy coat" surrounding amyloid fibrils. While pathogenic aggregates (such as Tau or &alpha;-synuclein) feature a highly ordered, rigid cross-&beta; sheet structural core, they are typically flanked by heavily disordered polypeptide segments. Utilizing sophisticated multi-scale molecular modeling, we examine how this flexible fuzzy coat controls fibril stability, surface interactions, and phase behavior in cellular environments.</p>
+                <img src="images/research_fuzzy_coat.png" alt="Amyloid Fibril Fuzzy Coat Structural Model" class="research-image" width="100%">
+            </div>
             
             <div class="research-item">
-                <h3>III. Self-Assembly of Alternating Copolymers</h3>
+                <h3>IV. Self-Assembly of Alternating Copolymers</h3>
                 <p>I study the self-assembly and phase behaviors of amphiphilic alternating copolymers for smart nanomaterial design. My work explores the morphological diversity of self-assembled structures and their unique characteristics, with findings validated through experimental collaboration.</p>
                 <img src="images/research3.png" alt="Self-Assembly of Alternating Copolymers" class="research-image" width="100%">
             </div>
             
             <div class="research-item">
-                <h3>IV. Experimental Collaboration</h3>
+                <h3>V. Experimental Collaboration</h3>
                 <p>A hallmark of my research is close collaboration with experimentalists. I provide molecular-level insights into complex experimental phenomena across diverse topics—from smart materials and protein-polymer interactions to mesoscale analyses of phase behavior. Through an integrative computational and experimental approach, we reveal and interpret complex behaviors in biological and soft matter systems.</p>
                 <img src="images/research4.png" alt="Experimental Collaboration" class="research-image" width="100%">
             </div>
@@ -397,5 +430,33 @@
     <footer>
         &copy; 2025 Shanlong Li &mdash; Built with AI.
     </footer>
+
+    <!-- NGL Script Execution -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var stage1 = new NGL.Stage("viewport1", { backgroundColor: "white" });
+            stage1.loadFile("./image/traj1.pdb").then(function (o) {
+                o.addRepresentation("cartoon", { color: "chainname" });
+                o.autoView();
+                var trajComp1 = o.addTrajectory();
+                trajComp1.trajectory.player.play();
+                trajComp1.trajectory.player.parameters.timeout = 100;
+            }).catch(function(e) { console.error("Error loading traj1.pdb:", e); });
+
+            var stage2 = new NGL.Stage("viewport2", { backgroundColor: "white" });
+            stage2.loadFile("./image/traj2.pdb").then(function (o) {
+                o.addRepresentation("cartoon", { color: "chainname" });
+                o.autoView();
+                var trajComp2 = o.addTrajectory();
+                trajComp2.trajectory.player.play();
+                trajComp2.trajectory.player.parameters.timeout = 100;
+            }).catch(function(e) { console.error("Error loading traj2.pdb:", e); });
+
+            window.addEventListener("resize", function () {
+                stage1.handleResize();
+                stage2.handleResize();
+            }, false);
+        });
+    </script>
 </body>
 </html>
