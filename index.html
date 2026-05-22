@@ -36,9 +36,9 @@
         }
         
         .container {
-            max-width: 1200px;
+            width: 85%;
             margin: 40px auto;
-            padding: 0 20px;
+            padding: 0;
             display: grid;
             grid-template-columns: 1fr 1.2fr;
             gap: 40px;
@@ -251,17 +251,18 @@
             font-size: 0.9em;
         }
         
-        /* Tablet: More balanced columns */
+        /* Tablet: Maintain ratio, 85% width */
         @media (max-width: 1024px) {
             .container {
-                grid-template-columns: 1fr 1fr;
-                max-width: 100%;
+                width: 85%;
+                grid-template-columns: 1fr 1.2fr;
             }
         }
         
         /* Mobile: Stack vertically */
         @media (max-width: 768px) {
             .container {
+                width: 90%;
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
@@ -273,6 +274,32 @@
             .profile-image {
                 width: 120px;
                 height: 120px;
+            }
+            
+            h2 {
+                font-size: 1.2em;
+            }
+        }
+        
+        /* Small mobile */
+        @media (max-width: 480px) {
+            .container {
+                width: 95%;
+                gap: 15px;
+            }
+            
+            .left-column,
+            .right-column {
+                padding: 20px;
+            }
+            
+            header h1 {
+                font-size: 1.5em;
+            }
+            
+            .profile-image {
+                width: 100px;
+                height: 100px;
             }
         }
     </style>
@@ -368,7 +395,7 @@
     </div>
     
     <footer>
-        &copy; 2025 Shanlong Li &mdash; Built with Copilot
+        &copy; 2025 Shanlong Li &mdash; Built with AI.
     </footer>
 </body>
 </html>
