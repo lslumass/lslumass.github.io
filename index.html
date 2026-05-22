@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shanlong Li</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1em;
+            opacity: 0.95;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 40px;
+        }
+        
+        .left-column {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            height: fit-content;
+        }
+        
+        .right-column {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            margin: 0 auto 20px;
+            border: 4px solid #667eea;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .profile-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 8px;
+            text-align: center;
+        }
+        
+        .info-section {
+            margin-bottom: 20px;
+        }
+        
+        .info-section p {
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+        
+        .info-label {
+            font-weight: 600;
+            color: #667eea;
+        }
+        
+        .contact-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+        
+        .contact-list li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .contact-icon {
+            width: 24px;
+            height: 24px;
+            fill: #667eea;
+            flex-shrink: 0;
+        }
+        
+        .contact-list a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .contact-list a:hover {
+            text-decoration: underline;
+        }
+        
+        .intro-text {
+            margin-bottom: 25px;
+            font-size: 0.95em;
+            line-height: 1.7;
+            text-align: center;
+        }
+        
+        .publications-section {
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 2px solid #ecf0f1;
+        }
+        
+        .publications-section h3 {
+            color: #667eea;
+            font-size: 1.1em;
+            margin-bottom: 12px;
+        }
+        
+        .publications-section a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .publications-section a:hover {
+            text-decoration: underline;
+        }
+        
+        .models-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #ecf0f1;
+        }
+        
+        .models-section h3 {
+            color: #667eea;
+            font-size: 1.1em;
+            margin-bottom: 12px;
+        }
+        
+        .model-item {
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+        }
+        
+        .model-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .model-item p {
+            font-size: 0.95em;
+            margin: 0;
+        }
+        
+        .model-name {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .model-name a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .model-name a:hover {
+            text-decoration: underline;
+        }
+        
+        .model-description {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 3px;
+        }
+        
+        .contact-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #ecf0f1;
+        }
+        
+        .contact-section h3 {
+            color: #667eea;
+            font-size: 1.1em;
+            margin-bottom: 12px;
+        }
+        
+        .research-item {
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        .research-item:last-child {
+            border-bottom: none;
+        }
+        
+        .research-item h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .research-item p {
+            font-size: 0.95em;
+            line-height: 1.7;
+        }
+        
+        .research-image {
+            margin-top: 15px;
+            max-width: 100%;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        footer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            .profile-image {
+                width: 120px;
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Computational Phase Physics</h1>
+        <p>understand the physics of phase behaviors of soft matter</p>
+    </header>
+    
+    <div class="container">
+        <!-- Left Column -->
+        <div class="left-column">
+            <div class="profile-container">
+                <img src="images/personal.jpeg" alt="Shanlong Li" class="profile-image">
+                <h2>Shanlong Li</h2>
+            </div>
+            
+            <div class="intro-text">
+                <p>Hi, I am Shanlong Li, postdoc in UMass Amherst. My research focuses on developing multi-scale computational methods to advance our understanding of the dynamics and interactions of bio- and designed macromolecules, including recognition, self-assembly, phase transitions, and aggregation. Welcome to my homepage.</p>
+            </div>
+            
+            <div class="publications-section">
+                <h3>Publications</h3>
+                <a href="https://scholar.google.com/citations?user=8XlBe40AAAAJ&hl=en" target="_blank">View all on Google Scholar →</a>
+            </div>
+            
+            <div class="models-section">
+                <h3>Models</h3>
+                <div class="model-item">
+                    <p class="model-name"><a href="https://pubs.acs.org/doi/full/10.1021/jacs.3c09195" target="_blank">HyRes Protein Model</a></p>
+                    <p class="model-description">Hybrid resolution coarse-grained model for protein simulations</p>
+                </div>
+                <div class="model-item">
+                    <p class="model-name"><a href="https://www.pnas.org/doi/10.1073/pnas.2504583122" target="_blank">iConRNA Model</a></p>
+                    <p class="model-description">Intermediate resolution model for RNA simulations</p>
+                </div>
+            </div>
+            
+            <div class="contact-section">
+                <h3>Contact</h3>
+                <ul class="contact-list">
+                    <li>
+                        <svg class="contact-icon" viewBox="0 0 24 24">
+                            <path d="M2 5.5A2.5 2.5 0 0 1 4.5 3h15A2.5 2.5 0 0 1 22 5.5v13A2.5 2.5 0 0 1 19.5 21h-15A2.5 2.5 0 0 1 2 18.5v-13zm2.5-.5a.5.5 0 0 0-.5.5v.16l8 5.34 8-5.34V5.5a.5.5 0 0 0-.5-.5h-15zm15.5 2.55-7.5 5-7.5-5V18.5a.5.5 0 0 0 .5.5h15a.5.5 0 0 0 .5-.5V7.55z"/>
+                        </svg>
+                        <a href="mailto:shanlongli@umass.edu">shanlongli@umass.edu</a>
+                    </li>
+                    <li>
+                        <svg class="contact-icon" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.52 2.87 8.36 6.84 9.72.5.09.66-.22.66-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.36-3.37-1.36-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06 .9 1.56 2.36 1.11 2.94.85.09-.66.35-1.11.63-1.36-2.22-.26-4.56-1.14-4.56-5.05 0-1.12.39-2.04 1.03-2.76-.1-.26-.45-1.29.1-2.68 0 0 .84-.28 2.76 1.05a9.15 9.15 0 0 1 2.51-.35c.85 0 1.71.12 2.51.35 1.93-1.33 2.76-1.05 2.76-1.05 .55 1.39.2 2.41.1 2.68.64.72 1.03 1.64 1.03 2.76 0 3.92-2.34 4.78-4.57 5.04.36.32.68.95.68 1.91 0 1.38-.01 2.5-.01 2.84 0 .26.17.57.67.47C19.14 20.6 22 16.77 22 12.25 22 6.58 17.52 2 12 2z"/>
+                        </svg>
+                        <a href="https://github.com/lslumass" target="_blank">github.com/lslumass</a>
+                    </li>
+                    <li>
+                        <svg class="contact-icon" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.5 2 12s4.48 10 10 10 10-4.5 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
+                        </svg>
+                        <a href="https://scholar.google.com/citations?user=8XlBe40AAAAJ&hl=en" target="_blank">Google Scholar</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Right Column -->
+        <div class="right-column">
+            <h2>Research</h2>
+            
+            <div class="research-item">
+                <h3>I. Efficient Models for Biomolecules and Polymers</h3>
+                <p>I develop accurate coarse-grained (CG) models for simulating self-assembly and phase behaviors of biomacromolecules on large time and length scales. These models are carefully parameterized using experimental data and all-atom simulations, and are distributed in OpenMM, Gromacs, and Hoomd-blue packages.</p>
+                <img src="images/research1.png" alt="Efficient Models for Biomolecules and Polymers" class="research-image" width="100%">
+            </div>
+            
+            <div class="research-item">
+                <h3>II. Biomolecular Condensation and Material Properties</h3>
+                <p>I investigate biomolecular condensates through computational modeling of phase separation in proteins and RNA. My work reveals the coupling between molecular structure and phase behavior, including the roles of folding, pairing, and competitive interactions in determining material properties.</p>
+                <img src="images/research2.png" alt="Biomolecular Condensation and Material Properties" class="research-image" width="100%">
+            </div>
+            
+            <div class="research-item">
+                <h3>III. Self-Assembly of Alternating Copolymers</h3>
+                <p>I study the self-assembly and phase behaviors of amphiphilic alternating copolymers for smart nanomaterial design. My work explores the morphological diversity of self-assembled structures and their unique characteristics, with findings validated through experimental collaboration.</p>
+                <img src="images/research3.png" alt="Self-Assembly of Alternating Copolymers" class="research-image" width="100%">
+            </div>
+            
+            <div class="research-item">
+                <h3>IV. Experimental Collaboration</h3>
+                <p>A hallmark of my research is close collaboration with experimentalists. I provide molecular-level insights into complex experimental phenomena across diverse topics—from smart materials and protein-polymer interactions to mesoscale analyses of phase behavior. Through an integrative computational and experimental approach, we reveal and interpret complex behaviors in biological and soft matter systems.</p>
+                <img src="images/research4.png" alt="Experimental Collaboration" class="research-image" width="100%">
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        &copy; 2025 Shanlong Li &mdash; Built with Copilot
+    </footer>
+</body>
+</html>
