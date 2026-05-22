@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shanlong Li</title>
-    <!-- Include NGL Viewer Dependency -->
-    <script src="https://unpkg.com/ngl@2.0.0-dev.37/dist/ngl.js"></script>
     <style>
         * {
             margin: 0;
@@ -42,8 +40,9 @@
             margin: 40px auto;
             padding: 0;
             display: grid;
-            grid-template-columns: 1fr 2fr; /* Ratio updated to exactly 1:2 */
+            grid-template-columns: 1fr 2fr; /* 1:2 Column Ratio */
             gap: 40px;
+            align-items: stretch;           /* Forces columns to have identical height */
         }
         
         .left-column {
@@ -51,7 +50,7 @@
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            height: fit-content;
+            height: 100%;                  /* Extends the card background color to match the right column */
         }
         
         .right-column {
@@ -207,30 +206,13 @@
         .contact-section {
             margin-top: 20px;
             padding-top: 20px;
-            border-top: 2px solid #ecf0f1;
+            border-top: 2px solid #ecf0f1; /* Flow follows directly after the Models section without any bottom gap */
         }
         
         .contact-section h3 {
             color: #667eea;
             font-size: 1.1em;
             margin-bottom: 12px;
-        }
-
-        /* --- Minimalist Trajectory Split View --- */
-        .trajectory-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-        
-        .ngl-square-viewport {
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            background-color: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 6px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
         
         .research-item {
@@ -261,6 +243,15 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         
+        footer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+            font-size: 0.9em;
+        }
+        
         @media (max-width: 1024px) {
             .container {
                 width: 85%;
@@ -273,10 +264,6 @@
                 width: 90%;
                 grid-template-columns: 1fr;
                 gap: 20px;
-            }
-            
-            .trajectory-container {
-                grid-template-columns: 1fr;
             }
             
             header h1 {
@@ -377,12 +364,6 @@
         
         <!-- Right Column -->
         <div class="right-column">
-            <!-- Square Viewport Windows Only -->
-            <div class="trajectory-container">
-                <div id="viewport1" class="ngl-square-viewport"></div>
-                <div id="viewport2" class="ngl-square-viewport"></div>
-            </div>
-
             <h2>Research Interests</h2>
             
             <div class="research-item">
@@ -397,7 +378,6 @@
                 <img src="images/research2.png" alt="Biomolecular Condensation and Material Properties" class="research-image" width="100%">
             </div>
 
-            <!-- Inserted Third Section: Amyloid fibril fuzzy coat -->
             <div class="research-item">
                 <h3>III. Amyloid Fibril Fuzzy Coat</h3>
                 <p>I investigate the structural dynamics and thermodynamic properties of the "fuzzy coat" surrounding amyloid fibrils. While pathogenic aggregates (such as Tau or &alpha;-synuclein) feature a highly ordered, rigid cross-&beta; sheet structural core, they are typically flanked by heavily disordered polypeptide segments. Utilizing sophisticated multi-scale molecular modeling, we examine how this flexible fuzzy coat controls fibril stability, surface interactions, and phase behavior in cellular environments.</p>
@@ -421,33 +401,5 @@
     <footer>
         &copy; 2026 Shanlong Li &mdash; Built with AI.
     </footer>
-
-    <!-- NGL Script Execution -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var stage1 = new NGL.Stage("viewport1", { backgroundColor: "white" });
-            stage1.loadFile("./image/traj1.pdb").then(function (o) {
-                o.addRepresentation("cartoon", { color: "chainname" });
-                o.autoView();
-                var trajComp1 = o.addTrajectory();
-                trajComp1.trajectory.player.play();
-                trajComp1.trajectory.player.parameters.timeout = 100;
-            }).catch(function(e) { console.error("Error loading traj1.pdb:", e); });
-
-            var stage2 = new NGL.Stage("viewport2", { backgroundColor: "white" });
-            stage2.loadFile("./image/traj2.pdb").then(function (o) {
-                o.addRepresentation("cartoon", { color: "chainname" });
-                o.autoView();
-                var trajComp2 = o.addTrajectory();
-                trajComp2.trajectory.player.play();
-                trajComp2.trajectory.player.parameters.timeout = 100;
-            }).catch(function(e) { console.error("Error loading traj2.pdb:", e); });
-
-            window.addEventListener("resize", function () {
-                stage1.handleResize();
-                stage2.handleResize();
-            }, false);
-        });
-    </script>
 </body>
 </html>
