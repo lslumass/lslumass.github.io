@@ -36,11 +36,11 @@
         }
         
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 40px auto;
             padding: 0 20px;
             display: grid;
-            grid-template-columns: 1fr 1.5fr;
+            grid-template-columns: 1fr 1.2fr;
             gap: 40px;
         }
         
@@ -251,6 +251,15 @@
             font-size: 0.9em;
         }
         
+        /* Tablet: More balanced columns */
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr 1fr;
+                max-width: 100%;
+            }
+        }
+        
+        /* Mobile: Stack vertically */
         @media (max-width: 768px) {
             .container {
                 grid-template-columns: 1fr;
@@ -278,7 +287,7 @@
         <!-- Left Column -->
         <div class="left-column">
             <div class="profile-container">
-                <img src="images/personal.jpeg" alt="Shanlong Li" class="profile-image">
+                <img src="images/personal.png" alt="Shanlong Li" class="profile-image">
                 <h2>Shanlong Li</h2>
             </div>
             
@@ -353,7 +362,7 @@
             <div class="research-item">
                 <h3>IV. Experimental Collaboration</h3>
                 <p>A hallmark of my research is close collaboration with experimentalists. I provide molecular-level insights into complex experimental phenomena across diverse topics—from smart materials and protein-polymer interactions to mesoscale analyses of phase behavior. Through an integrative computational and experimental approach, we reveal and interpret complex behaviors in biological and soft matter systems.</p>
-                <img src="images/research4.png" alt="Experimental Collaboration" class="research-image" width="100%">
+                <img src="images/research3.png" alt="Experimental Collaboration" class="research-image" width="100%">
             </div>
         </div>
     </div>
