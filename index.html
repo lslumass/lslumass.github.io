@@ -1,405 +1,866 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shanlong Li</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f9f9f9;
-        }
-        
-        header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 50px 20px;
-            text-align: center;
-        }
-        
-        header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-        
-        header p {
-            font-size: 1em;
-            opacity: 0.95;
-        }
-        
-        .container {
-            width: 80%;
-            margin: 40px auto;
-            padding: 0;
-            display: grid;
-            grid-template-columns: 1fr 2fr; /* 1:2 Column Ratio */
-            gap: 40px;
-            align-items: stretch;           /* Forces columns to have identical height */
-        }
-        
-        .left-column {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            height: 100%;                  /* Extends the card background color to match the right column */
-        }
-        
-        .right-column {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        
-        .profile-image {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            display: block;
-            margin: 0 auto 20px;
-            border: 4px solid #667eea;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-        
-        .profile-container {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        
-        h2 {
-            color: #667eea;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-            border-bottom: 2px solid #667eea;
-            padding-bottom: 8px;
-            text-align: center;
-        }
-        
-        .info-section {
-            margin-bottom: 20px;
-        }
-        
-        .info-section p {
-            margin-bottom: 8px;
-            font-size: 0.95em;
-        }
-        
-        .info-label {
-            font-weight: 600;
-            color: #667eea;
-        }
-        
-        .contact-list {
-            list-style: none;
-            margin-top: 15px;
-        }
-        
-        .contact-list li {
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .contact-icon {
-            width: 24px;
-            height: 24px;
-            fill: #667eea;
-            flex-shrink: 0;
-        }
-        
-        .contact-list a {
-            color: #667eea;
-            text-decoration: none;
-        }
-        
-        .contact-list a:hover {
-            text-decoration: underline;
-        }
-        
-        .intro-text {
-            margin-bottom: 25px;
-            font-size: 0.95em;
-            line-height: 1.7;
-            text-align: center;
-        }
-        
-        .publications-section {
-            margin-top: 25px;
-            padding-top: 25px;
-            border-top: 2px solid #ecf0f1;
-        }
-        
-        .publications-section h3 {
-            color: #667eea;
-            font-size: 1.1em;
-            margin-bottom: 12px;
-        }
-        
-        .publications-section a {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        
-        .publications-section a:hover {
-            text-decoration: underline;
-        }
-        
-        .models-section {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 2px solid #ecf0f1;
-        }
-        
-        .models-section h3 {
-            color: #667eea;
-            font-size: 1.1em;
-            margin-bottom: 12px;
-        }
-        
-        .model-item {
-            margin-bottom: 12px;
-            padding-bottom: 12px;
-        }
-        
-        .model-item:last-child {
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-        
-        .model-item p {
-            font-size: 0.95em;
-            margin: 0;
-        }
-        
-        .model-name {
-            font-weight: 600;
-            color: #333;
-        }
-        
-        .model-name a {
-            color: #667eea;
-            text-decoration: none;
-        }
-        
-        .model-name a:hover {
-            text-decoration: underline;
-        }
-        
-        .model-description {
-            font-size: 0.9em;
-            color: #666;
-            margin-top: 3px;
-        }
-        
-        .contact-section {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 2px solid #ecf0f1; /* Flow follows directly after the Models section without any bottom gap */
-        }
-        
-        .contact-section h3 {
-            color: #667eea;
-            font-size: 1.1em;
-            margin-bottom: 12px;
-        }
-        
-        .research-item {
-            margin-bottom: 30px;
-            padding-bottom: 30px;
-            border-bottom: 1px solid #ecf0f1;
-        }
-        
-        .research-item:last-child {
-            border-bottom: none;
-        }
-        
-        .research-item h3 {
-            color: #667eea;
-            margin-bottom: 10px;
-            font-size: 1.1em;
-        }
-        
-        .research-item p {
-            font-size: 0.95em;
-            line-height: 1.7;
-        }
-        
-        .research-image {
-            margin-top: 15px;
-            max-width: 100%;
-            border-radius: 6px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        
-        footer {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 50px;
-            font-size: 0.9em;
-        }
-        
-        @media (max-width: 1024px) {
-            .container {
-                width: 85%;
-                grid-template-columns: 1fr 1.5fr;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                width: 90%;
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            header h1 {
-                font-size: 1.8em;
-            }
-            
-            .profile-image {
-                width: 120px;
-                height: 120px;
-            }
-            
-            h2 {
-                font-size: 1.2em;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .container {
-                width: 95%;
-                gap: 15px;
-            }
-            
-            .left-column,
-            .right-column {
-                padding: 20px;
-            }
-            
-            header h1 {
-                font-size: 1.5em;
-            }
-            
-            .profile-image {
-                width: 100px;
-                height: 100px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shanlong Li — Computational Phase Physics</title>
+<meta name="description" content="Shanlong Li, postdoctoral researcher at UMass Amherst, develops physics-based multiscale models to study biomolecular condensates, amyloid fibrils, and polymer self-assembly.">
+<meta property="og:title" content="Shanlong Li — Computational Phase Physics">
+<meta property="og:description" content="Physics-based multiscale modeling of how biomolecules and polymers self-assemble, phase separate, and aggregate.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://lslumass.github.io/">
+<meta property="og:image" content="https://lslumass.github.io/images/profile.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fbfaf8;
+    --surface: #ffffff;
+    --text: #1d2327;
+    --muted: #5b656c;
+    --line: #e4e2dd;
+    --accent: #0e6e78;
+    --accent-soft: #e3f1f2;
+    --mark: #b4541a;
+    --figure-bg: #ffffff;
+    --shadow: 0 1px 2px rgba(0,0,0,.04), 0 4px 16px rgba(0,0,0,.04);
+    --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #121619;
+      --surface: #1a2024;
+      --text: #e6e9eb;
+      --muted: #9aa5ac;
+      --line: #2b3439;
+      --accent: #5cc3cc;
+      --accent-soft: #173136;
+      --mark: #f0a46c;
+      --shadow: none;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #121619; --surface: #1a2024; --text: #e6e9eb; --muted: #9aa5ac;
+    --line: #2b3439; --accent: #5cc3cc; --accent-soft: #173136; --mark: #f0a46c; --shadow: none;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+  body {
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--text);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  img { max-width: 100%; height: auto; display: block; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+
+  /* Nav */
+  .nav {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 56px; }
+  .nav .brand { font-family: var(--serif); font-weight: 600; font-size: 1.1rem; color: var(--text); white-space: nowrap; }
+  .nav ul { list-style: none; display: flex; gap: 22px; overflow-x: auto; scrollbar-width: none; }
+  .nav ul::-webkit-scrollbar { display: none; }
+  .nav ul a { color: var(--muted); font-size: .92rem; font-weight: 500; white-space: nowrap; }
+  .nav ul a:hover { color: var(--accent); text-decoration: none; }
+
+  /* Hero */
+  .hero { padding: 64px 0 56px; border-bottom: 1px solid var(--line); }
+  .hero .wrap { display: grid; grid-template-columns: 180px 1fr; gap: 44px; align-items: center; }
+  .hero img { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; }
+  .hero h1 { font-family: var(--serif); font-weight: 600; font-size: 2.6rem; line-height: 1.15; letter-spacing: -.01em; }
+  .hero .tagline { font-family: var(--serif); font-size: 1.3rem; color: var(--text); margin: 10px 0 8px; line-height: 1.4; max-width: 34em; }
+  .hero .role { color: var(--muted); font-size: .98rem; }
+  .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 7px 14px; border: 1px solid var(--line); border-radius: 999px;
+    font-size: .9rem; font-weight: 500; color: var(--text); background: var(--surface);
+  }
+  .btn:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+  .btn svg { width: 16px; height: 16px; fill: currentColor; }
+
+  /* Sections */
+  section { padding: 64px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+  .eyebrow { font-size: .78rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+  h2 { font-family: var(--serif); font-weight: 600; font-size: 1.9rem; line-height: 1.2; margin-bottom: 14px; }
+  .lede { color: var(--muted); max-width: 46em; margin-bottom: 36px; font-size: 1.02rem; }
+
+  /* Research themes */
+  .theme { display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center; padding: 32px 0; border-top: 1px solid var(--line); }
+  .theme:first-of-type { border-top: none; padding-top: 0; }
+  .theme .num { font-family: var(--serif); color: var(--accent); font-size: 1rem; font-weight: 600; }
+  .theme h3 { font-family: var(--serif); font-weight: 600; font-size: 1.35rem; line-height: 1.3; margin: 2px 0 10px; }
+  .theme p { color: var(--text); margin-bottom: 12px; }
+  .theme .key { font-size: .9rem; color: var(--muted); }
+  .theme .key a { font-weight: 500; }
+  .figs { display: grid; gap: 12px; }
+  figure { background: var(--figure-bg); border: 1px solid var(--line); border-radius: 10px; padding: 12px; }
+  figure figcaption { font-size: .75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #3d474d; margin: 0 0 8px 2px; }
+  figure img { margin: 0 auto; }
+  .figs figure.fig-sm, .figs figure.fig-md { width: fit-content; max-width: 100%; margin: 0 auto; }
+  figure.fig-sm img { width: 300px; max-width: 100%; }
+  figure.fig-xs img { width: 240px; }
+  figure.fig-md img { width: 320px; max-width: 100%; }
+  .theme-wide { grid-template-columns: 1fr; gap: 20px; }
+  .theme-wide > div:first-child { max-width: 46em; }
+  .tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .tile { padding: 10px; display: flex; flex-direction: column; }
+  .tile img { aspect-ratio: 1; object-fit: contain; width: 100%; }
+  .tile figcaption { text-transform: none; letter-spacing: 0; font-size: .85rem; font-weight: 600; margin: 8px 2px 0; display: flex; flex-direction: column; gap: 1px; }
+  .tile figcaption a { font-weight: 500; font-size: .8rem; color: #0e6e78; }
+  .tiles-label { font-size: .78rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 6px 0 -8px; }
+  .tile-groups { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .tile-groups .tiles-label { margin: 0 0 8px; }
+  .tiles-compact { gap: 8px; }
+  .tiles-4 { max-width: 620px; }
+  .tiles-compact .tile { padding: 6px; border-radius: 8px; }
+  .tiles-compact .tile figcaption { font-size: .74rem; margin: 6px 1px 0; line-height: 1.3; }
+  .tiles-compact .tile figcaption a { font-size: inherit; font-weight: 600; }
+
+  /* Models cards */
+  .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px; box-shadow: var(--shadow); display: flex; flex-direction: column; }
+  .card .tag { font-size: .75rem; font-weight: 600; color: var(--accent); background: var(--accent-soft); border-radius: 999px; padding: 2px 10px; align-self: flex-start; margin-bottom: 10px; }
+  .card h3 { font-family: var(--serif); font-size: 1.25rem; font-weight: 600; margin-bottom: 6px; }
+  .card p { color: var(--muted); font-size: .95rem; margin-bottom: 14px; flex: 1; }
+  .card .actions { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: .9rem; font-weight: 500; }
+  .db-rows { display: grid; gap: 18px; }
+  .db-row { display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px; box-shadow: var(--shadow); }
+  .db-text .tag { font-size: .75rem; font-weight: 600; color: var(--accent); background: var(--accent-soft); border-radius: 999px; padding: 2px 10px; display: inline-block; margin-bottom: 10px; }
+  .db-text h3 { font-family: var(--serif); font-size: 1.25rem; font-weight: 600; margin-bottom: 6px; }
+  .db-text p { color: var(--muted); font-size: .95rem; margin-bottom: 14px; }
+  .db-text .actions { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: .9rem; font-weight: 500; }
+  .db-row figure { margin: 0; }
+  .db-fig img { width: 130px; max-width: 100%; }
+  .db-fig-sm img { width: 115px; }
+  .soon { font-size: .85rem; font-weight: 500; color: var(--muted); font-style: italic; }
+  .more-tools { margin-top: 26px; font-size: .93rem; color: var(--muted); }
+  .more-tools strong { color: var(--text); font-weight: 600; }
+
+  /* Publications */
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+  .chip { font: inherit; font-size: .88rem; font-weight: 500; padding: 5px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--muted); cursor: pointer; }
+  .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+  .pubs { list-style: none; }
+  .pub { display: grid; grid-template-columns: 64px 1fr; gap: 16px; padding: 16px 0; border-top: 1px solid var(--line); }
+  .pub:first-child { border-top: none; }
+  .pub[hidden] { display: none; }
+  .pub .yr { font-family: var(--serif); font-weight: 600; color: var(--muted); padding-top: 1px; }
+  .pub .title { font-weight: 600; line-height: 1.45; }
+  .pub .title a { color: var(--text); }
+  .pub .title a:hover { color: var(--accent); }
+  .pub .authors { font-size: .92rem; color: var(--muted); margin-top: 3px; }
+  .pub .authors b { color: var(--text); font-weight: 600; }
+  .pub .venue { font-size: .92rem; font-style: italic; color: var(--muted); }
+  .pub .badge { font-style: normal; font-size: .72rem; font-weight: 600; color: var(--mark); border: 1px solid currentColor; border-radius: 4px; padding: 0 5px; margin-left: 6px; vertical-align: 1px; }
+  .more-pubs { margin-top: 18px; font: inherit; font-size: .9rem; font-weight: 500; padding: 7px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--accent); cursor: pointer; }
+  .more-pubs:hover { border-color: var(--accent); }
+  .full-list { margin-top: 22px; font-weight: 500; }
+
+
+  /* Contact */
+  .contact-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+
+  footer { padding: 32px 0 48px; color: var(--muted); font-size: .88rem; }
+
+  @media (max-width: 820px) {
+    .theme { grid-template-columns: 1fr; gap: 20px; }
+    .cards { grid-template-columns: 1fr; }
+    .db-row { grid-template-columns: 1fr; gap: 16px; }
+    .tiles { grid-template-columns: repeat(2, 1fr); }
+    .tile-groups { grid-template-columns: 1fr; }
+    .tiles-compact { grid-template-columns: repeat(4, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .wrap { padding: 0 16px; }
+    .nav .brand { display: none; }
+    .nav .wrap { justify-content: flex-start; }
+    .nav ul { gap: 11px; }
+    .nav ul a { font-size: .8rem; }
+    .hero { padding: 40px 0; }
+    .hero .wrap { grid-template-columns: 1fr; gap: 20px; }
+    .hero img { width: 120px; height: 120px; }
+    .hero h1 { font-size: 2rem; }
+    .hero .tagline { font-size: 1.12rem; }
+    section { padding: 44px 0; }
+    h2 { font-size: 1.55rem; }
+    .pub { grid-template-columns: 1fr; gap: 2px; }
+    .tiles-compact { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
 </head>
 <body>
-    <header>
-        <h1>Computational Phase Physics</h1>
-        <p>understanding phase behaviors of biomolecules and polymers</p>
-    </header>
-    
-    <div class="container">
-        <!-- Left Column -->
-        <div class="left-column">
-            <div class="profile-container">
-                <img src="images/personal.png" alt="Shanlong Li" class="profile-image">
-                <h2>Shanlong Li</h2>
-            </div>
-            
-            <div class="intro-text">
-                <p>Hi, I am Shanlong Li, postdoc in UMass Amherst. My research focuses on developing multi-scale computational methods to advance our understanding of the dynamics and interactions of bio- and designed macromolecules, including recognition, self-assembly, phase transitions, and aggregation.</p>
-            </div>
-            
-            <div class="publications-section">
-                <h3>Publications</h3>
-                <a href="https://scholar.google.com/citations?user=8XlBe40AAAAJ&hl=en" target="_blank">View all on Google Scholar →</a>
-            </div>
-            
-            <div class="models-section">
-                <h3>Models</h3>
-                <div class="model-item">
-                    <p class="model-name"><a href="https://pubs.acs.org/doi/full/10.1021/jacs.3c09195" target="_blank">HyRes Protein Model</a></p>
-                    <p class="model-description">Hybrid resolution coarse-grained model for protein simulations</p>
-                </div>
-                <div class="model-item">
-                    <p class="model-name"><a href="https://www.pnas.org/doi/10.1073/pnas.2504583122" target="_blank">iConRNA Model</a></p>
-                    <p class="model-description">Intermediate resolution model for RNA simulations</p>
-                </div>
-            </div>
-            
-            <div class="contact-section">
-                <h3>Contact</h3>
-                <ul class="contact-list">
-                    <li>
-                        <svg class="contact-icon" viewBox="0 0 24 24">
-                            <path d="M2 5.5A2.5 2.5 0 0 1 4.5 3h15A2.5 2.5 0 0 1 22 5.5v13A2.5 2.5 0 0 1 19.5 21h-15A2.5 2.5 0 0 1 2 18.5v-13zm2.5-.5a.5.5 0 0 0-.5.5v.16l8 5.34 8-5.34V5.5a.5.5 0 0 0-.5-.5h-15zm15.5 2.55-7.5 5-7.5-5V18.5a.5.5 0 0 0 .5.5h15a.5.5 0 0 0 .5-.5V7.55z"/>
-                        </svg>
-                        <a href="mailto:shanlongli@umass.edu">shanlongli@umass.edu</a>
-                    </li>
-                    <li>
-                        <svg class="contact-icon" viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.5 2 12.25c0 4.52 2.87 8.36 6.84 9.72.5.09.66-.22.66-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.36-3.37-1.36-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06 .9 1.56 2.36 1.11 2.94.85.09-.66.35-1.11.63-1.36-2.22-.26-4.56-1.14-4.56-5.05 0-1.12.39-2.04 1.03-2.76-.1-.26-.45-1.29.1-2.68 0 0 .84-.28 2.76 1.05a9.15 9.15 0 0 1 2.51-.35c.85 0 1.71.12 2.51.35 1.93-1.33 2.76-1.05 2.76-1.05 .55 1.39.2 2.41.1 2.68.64.72 1.03 1.64 1.03 2.76 0 3.92-2.34 4.78-4.57 5.04.36.32.68.95.68 1.91 0 1.38-.01 2.5-.01 2.84 0 .26.17.57.67.47C19.14 20.6 22 16.77 22 12.25 22 6.58 17.52 2 12 2z"/>
-                        </svg>
-                        <a href="https://github.com/lslumass" target="_blank">github.com/lslumass</a>
-                    </li>
-                    <li>
-                        <svg class="contact-icon" viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.5 2 12s4.48 10 10 10 10-4.5 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
-                        </svg>
-                        <a href="https://scholar.google.com/citations?user=8XlBe40AAAAJ&hl=en" target="_blank">Google Scholar</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        
-        <!-- Right Column -->
-        <div class="right-column">
-            <h2>Research Interests</h2>
-            
-            <div class="research-item">
-                <h3>I. Efficient Models for Biomolecules and Polymers</h3>
-                <p>I develop accurate coarse-grained (CG) models for simulating self-assembly and phase behaviors of biomacromolecules on large time and length scales. These models are carefully parameterized using experimental data and all-atom simulations, and are distributed in OpenMM, Gromacs, and Hoomd-blue packages.</p>
-                <img src="images/research1.png" alt="Efficient Models for Biomolecules and Polymers" class="research-image" width="100%">
-            </div>
-            
-            <div class="research-item">
-                <h3>II. Biomolecular Condensation and Material Properties</h3>
-                <p>I investigate biomolecular condensates through computational modeling of phase separation in proteins and RNA. My work reveals the coupling between molecular structure and phase behavior, including the roles of folding, pairing, and competitive interactions in determining material properties.</p>
-                <img src="images/research2.png" alt="Biomolecular Condensation and Material Properties" class="research-image" width="100%">
-            </div>
 
-            <div class="research-item">
-                <h3>III. Amyloid Fibril Fuzzy Coat</h3>
-                <p>I investigate the structural dynamics and thermodynamic properties of the "fuzzy coat" surrounding amyloid fibrils. While pathogenic aggregates (such as Tau or &alpha;-synuclein) feature a highly ordered, rigid cross-&beta; sheet structural core, they are typically flanked by heavily disordered polypeptide segments. Utilizing sophisticated multi-scale molecular modeling, we examine how this flexible fuzzy coat controls fibril stability, surface interactions, and phase behavior in cellular environments.</p>
-                <img src="images/research_fuzzy_coat.png" alt="Amyloid Fibril Fuzzy Coat Structural Model" class="research-image" width="100%">
-            </div>
-            
-            <div class="research-item">
-                <h3>IV. Self-Assembly of Alternating Copolymers</h3>
-                <p>I study the self-assembly and phase behaviors of amphiphilic alternating copolymers for smart nanomaterial design. My work explores the morphological diversity of self-assembled structures and their unique characteristics, with findings validated through experimental collaboration.</p>
-                <img src="images/research3.png" alt="Self-Assembly of Alternating Copolymers" class="research-image" width="100%">
-            </div>
-            
-            <div class="research-item">
-                <h3>V. Experimental Collaboration</h3>
-                <p>A hallmark of my research is close collaboration with experimentalists. I provide molecular-level insights into complex experimental phenomena across diverse topics—from smart materials and protein-polymer interactions to mesoscale analyses of phase behavior. Through an integrative computational and experimental approach, we reveal and interpret complex behaviors in biological and soft matter systems.</p>
-                <img src="images/research4.png" alt="Experimental Collaboration" class="research-image" width="100%">
-            </div>
-        </div>
+<nav class="nav" aria-label="Sections">
+  <div class="wrap">
+    <a class="brand" href="#top">Shanlong Li</a>
+    <ul>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#models">Models</a></li>
+      <li><a href="#database">Database</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <img src="images/profile.jpg" alt="Portrait of Shanlong Li" width="180" height="180">
+    <div>
+      <h1>Shanlong Li</h1>
+      <p class="tagline">Physics-based multiscale modeling of how biomolecules and polymers self-assemble, phase separate, and aggregate.</p>
+      <p class="role">Postdoctoral Researcher, University of Massachusetts Amherst · with <a href="https://mdlab-um.github.io/lab/" target="_blank" rel="noopener">Prof. Jianhan Chen</a></p>
+      <div class="links">
+        <a class="btn" href="mailto:shanlongli@umass.edu">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 2v.4l8 5.1 8-5.1V6H4zm16 2.75-8 5.1-8-5.1V18h16V8.75z"/></svg>Email</a>
+        <a class="btn" href="cv.pdf" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h8l6 6v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm7 1.5V9h5.5L13 3.5zM8 13v1.6h8V13H8zm0 3.4V18h6v-1.6H8z"/></svg>CV</a>
+        <a class="btn" href="https://scholar.google.com/citations?user=8XlBe40AAAAJ&hl=en" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 1 9l11 6 9-4.91V17h2V9L12 3zm-6.82 9.4v4L12 20l6.82-3.6v-4L12 16l-6.82-3.6z"/></svg>Google Scholar</a>
+        <a class="btn" href="https://github.com/lslumass" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.5 2 12.25c0 4.52 2.87 8.36 6.84 9.72.5.09.66-.22.66-.48l-.01-1.7c-2.78.62-3.37-1.36-3.37-1.36-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.56 2.36 1.11 2.94.85.09-.66.35-1.11.63-1.36-2.22-.26-4.56-1.14-4.56-5.05 0-1.12.39-2.04 1.03-2.76-.1-.26-.45-1.29.1-2.68 0 0 .84-.28 2.76 1.05a9.15 9.15 0 0 1 5.02 0c1.93-1.33 2.76-1.05 2.76-1.05.55 1.39.2 2.41.1 2.68.64.72 1.03 1.64 1.03 2.76 0 3.92-2.34 4.78-4.57 5.04.36.32.68.95.68 1.91l-.01 2.84c0 .26.17.57.67.47A10.1 10.1 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>GitHub</a>
+      </div>
     </div>
-    
-    <footer>
-        &copy; 2026 Shanlong Li &mdash; Built with AI.
-    </footer>
+  </div>
+</header>
+
+<main>
+
+<section id="research">
+  <div class="wrap">
+    <p class="eyebrow">Research</p>
+    <h2>Phase behavior of biomolecules and polymers across scales</h2>
+    <p class="lede">How molecules self-assemble, phase separate, and aggregate underlies both cellular function and the design of new materials. My research develops physics-based computational models that bridge molecular detail and mesoscale behavior, and uses them, together with experiments, to understand and predict these processes in living and synthetic systems.</p>
+
+    <div class="theme">
+      <div>
+        <span class="num">01</span>
+        <h3>Physics-based multiscale models</h3>
+        <p>All-atom simulations are accurate but slow, while simple coarse-grained models miss the molecular features that matter for biology. I develop intermediate-resolution models that close this gap, for proteins (HyRes), nucleic acids (iCon), and small molecules, and integrate them into one framework for simulating complex biomolecular mixtures at near-cellular scale. The models are calibrated against experiments and all-atom simulations, combined with machine learning, and shared as open-source tools.</p>
+        <p class="key">Key work: <a href="https://doi.org/10.1021/jacs.3c09195" target="_blank" rel="noopener">JACS 2024</a> · <a href="https://doi.org/10.1073/pnas.2504583122" target="_blank" rel="noopener">PNAS 2025</a> · <a href="https://doi.org/10.64898/2026.09.15.751913" target="_blank" rel="noopener">bioRxiv 2026</a></p>
+      </div>
+      <div class="figs">
+        <figure class="fig-sm"><img src="images/models_overview.jpg" alt="Intermediate-resolution models: HyRes protein (a), iConNA for RNA and DNA with an RNA hairpin and DNA duplex (b), and iConMetabolome small molecules (c)" width="1400" height="1160" loading="lazy"></figure>
+      </div>
+    </div>
+
+    <div class="theme">
+      <div>
+        <span class="num">02</span>
+        <h3>Biomolecular condensates</h3>
+        <p>Biomolecular condensates organize the cell through phase separation, and their dysregulation is linked to diseases from neurodegeneration to cancer. I study how the sequence, structure, and interactions of proteins, nucleic acids, and small molecules determine how condensates form, what they contain, how they behave as materials, and how they age into pathological aggregates, with the long-term goal of guiding condensate-targeted therapeutics.</p>
+        <p class="key">Key work: <a href="https://doi.org/10.1021/jacs.3c09195" target="_blank" rel="noopener">JACS 2024</a> · <a href="https://doi.org/10.1042/bst20230618" target="_blank" rel="noopener">Biochem Soc Trans 2024</a> · <a href="https://doi.org/10.1073/pnas.2504583122" target="_blank" rel="noopener">PNAS 2025</a></p>
+      </div>
+      <div class="figs">
+        <figure class="fig-sm fig-xs"><img src="images/condensate_schematic.jpg" alt="Schematic of a biomolecular condensate containing proteins, RNA, DNA, and small molecules" width="560" height="589" loading="lazy"></figure>
+      </div>
+    </div>
+
+    <div class="theme">
+      <div>
+        <span class="num">03</span>
+        <h3>Amyloid fibrils and their fuzzy coats</h3>
+        <p>Amyloid fibrils in neurodegenerative diseases have an ordered core surrounded by a disordered "fuzzy coat" that has long been hard to see in experiments. Using large-scale simulations, I study how fuzzy coats are organized and how they shape fibril stability, surface properties, and interactions with chaperones, membranes, and small molecules.</p>
+        <p class="key">Related work: <a href="https://doi.org/10.1021/jacsau.5c01266" target="_blank" rel="noopener">JACS Au 2026</a></p>
+      </div>
+      <div class="figs">
+        <figure class="fig-md"><img src="images/fuzzy_coat_atlas.png" alt="From an atlas of amyloid fibril structures to a fuzzy coat atlas sampled with HyRes" width="833" height="716" loading="lazy"></figure>
+      </div>
+    </div>
+
+    <div class="theme theme-wide">
+      <div>
+        <span class="num">04</span>
+        <h3>Integrating simulation and experiment</h3>
+        <p>Close collaboration with experimental labs runs through all of my work. Simulations provide molecular-level explanations of experimental observations and testable predictions, across biomolecular recognition, membrane interactions, and condensation in cells.</p>
+      </div>
+      <div class="tiles tiles-compact tiles-4">
+        <figure class="tile">
+          <img src="images/collab_fibril_chaperone.jpg" alt="Chaperone DNAJB1 binding to the fuzzy coat of an α-synuclein fibril" width="568" height="568" loading="lazy">
+          <figcaption><a href="https://doi.org/10.1021/jacsau.5c01266" target="_blank" rel="noopener" title="JACS Au 2026">Protein–protein binding</a></figcaption>
+        </figure>
+        <figure class="tile">
+          <img src="images/collab_protein_polymer.jpg" alt="Polymer chain wrapping a protein surface" width="524" height="524" loading="lazy">
+          <figcaption><span>Protein–polymer binding</span></figcaption>
+        </figure>
+        <figure class="tile">
+          <img src="images/collab_tau_membrane.jpg" alt="Tau protein interacting with a lipid bilayer" width="567" height="567" loading="lazy">
+          <figcaption><a href="https://doi.org/10.1021/jacsau.5c01563" target="_blank" rel="noopener" title="JACS Au 2026">Protein–bilayer binding</a></figcaption>
+        </figure>
+        <figure class="tile">
+          <img src="images/collab_antibiotic_rna.jpg" alt="Antibiotic-induced RNA condensate" width="573" height="573" loading="lazy">
+          <figcaption><a href="https://doi.org/10.64898/2026.08.17.745126" target="_blank" rel="noopener" title="bioRxiv 2026">Antibiotic-induced RNA condensate</a></figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="theme theme-wide">
+      <div>
+        <span class="num">05</span>
+        <h3>Polymer self-assembly and materials design</h3>
+        <p>The same physics governs synthetic materials. I use simulation to understand how polymer sequence and architecture control self-assembly and phase behavior, and to design new nanostructures for smart materials, working with experimental groups to test the predictions.</p>
+      </div>
+      <div class="tile-groups">
+        <div>
+          <p class="tiles-label">Simulation</p>
+          <div class="tiles tiles-compact">
+        <figure class="tile">
+          <img src="images/sim_coil_alt_coil.jpg" alt="Morphologies self-assembled from coil-alt-coil copolymers" width="600" height="600" loading="lazy">
+          <figcaption><a href="https://doi.org/10.1007/s11426-018-9360-3" target="_blank" rel="noopener" title="Sci China Chem 2019">Coil-<i>alt</i>-coil copolymers</a></figcaption>
+        </figure>
+        <figure class="tile">
+          <img src="images/sim_rod_alt_coil.jpg" alt="Morphologies self-assembled from rod-alt-coil copolymers" width="600" height="600" loading="lazy">
+          <figcaption><a href="https://doi.org/10.1039/c9cp05577k" target="_blank" rel="noopener" title="PCCP 2019">Rod-<i>alt</i>-coil copolymers</a></figcaption>
+        </figure>
+        <figure class="tile">
+          <img src="images/sim_alt_block_alt.jpg" alt="Complex nanoparticles from blocked alternating copolymers" width="600" height="600" loading="lazy">
+          <figcaption><a href="https://doi.org/10.1021/acs.jpcb.9b07685" target="_blank" rel="noopener" title="J Phys Chem B 2019">Blocked alternating copolymers</a></figcaption>
+        </figure>
+        <figure class="tile">
+          <img src="images/sim_high_chi.jpg" alt="Sub-5 nm patterns from high-χ alternating copolymers" width="600" height="600" loading="lazy">
+          <figcaption><a href="https://doi.org/10.1039/d0cp00383b" target="_blank" rel="noopener" title="PCCP 2020">High-χ sub-5 nm patterns</a></figcaption>
+        </figure>
+          </div>
+        </div>
+        <div>
+          <p class="tiles-label">With experimental labs</p>
+          <div class="tiles tiles-compact">
+        <figure class="tile">
+          <img src="images/poly_porphyrin.jpg" alt="Porphyrin arrangement in supramolecular polymer vesicles, with chemical structure and microscopy" width="600" height="600" loading="lazy">
+          <figcaption><a href="https://doi.org/10.1038/s41467-020-15427-1" target="_blank" rel="noopener" title="Nat Commun 2020">Porphyrin arrangement</a></figcaption>
+        </figure>
+        <figure class="tile">
+          <img src="images/poly_hierarchical.jpg" alt="Hierarchical self-assembly into peapod-like micrometer tubes" width="600" height="600" loading="lazy">
+          <figcaption><a href="https://doi.org/10.1002/anie.202213178" target="_blank" rel="noopener" title="Angew Chem 2022">Hierarchical self-assembly</a></figcaption>
+        </figure>
+        <figure class="tile">
+          <img src="images/poly_nanosheet.jpg" alt="Nanostructure formation from a rod–coil alternating copolymer" width="600" height="600" loading="lazy">
+          <figcaption><a href="https://doi.org/10.1002/marc.202200437" target="_blank" rel="noopener" title="Macromol Rapid Commun 2022">Nanosheet formation</a></figcaption>
+        </figure>
+        <figure class="tile">
+          <img src="images/poly_photofission.jpg" alt="Light-triggered fission of polymersomes, from microscopy and simulation" width="600" height="600" loading="lazy">
+          <figcaption><span>Polymersome photo-fission</span></figcaption>
+        </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="models">
+  <div class="wrap">
+    <p class="eyebrow">Models</p>
+    <h2>Open models you can run</h2>
+    <p class="lede">All models are open source, with setup tools and tutorials on GitHub.</p>
+
+    <div class="cards">
+      <article class="card">
+        <span class="tag">Proteins</span>
+        <h3>HyRes</h3>
+        <p>Hybrid-resolution protein model that captures secondary structure and its coupling to phase separation, with GPU-accelerated simulation of dynamic proteins in complex environments.</p>
+        <div class="actions">
+          <a href="https://doi.org/10.1021/jacs.3c09195" target="_blank" rel="noopener">JACS 2024</a>
+          <a href="https://doi.org/10.64898/2026.06.23.734133" target="_blank" rel="noopener">HyRes preprint 2026</a>
+          <a href="https://github.com/lslumass/HyRes_GPU" target="_blank" rel="noopener">Tutorial</a>
+          <a href="https://github.com/lslumass/HyresBuilder" target="_blank" rel="noopener">HyresBuilder</a>
+        </div>
+      </article>
+      <article class="card">
+        <span class="tag">RNA</span>
+        <h3>iConRNA</h3>
+        <p>Intermediate-resolution RNA model with explicit Mg²⁺ that reveals the driving forces of RNA condensation, including base pairing and stacking.</p>
+        <div class="actions">
+          <a href="https://doi.org/10.1073/pnas.2504583122" target="_blank" rel="noopener">PNAS 2025</a>
+          <a href="https://github.com/lslumass/iConRNA" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </article>
+      <article class="card">
+        <span class="tag">DNA</span>
+        <h3>iConDNA</h3>
+        <p>Intermediate-resolution model of dynamic DNA structures and their phase separation, compatible with HyRes and iConRNA.</p>
+        <div class="actions">
+          <a href="https://doi.org/10.64898/2026.09.14.751430" target="_blank" rel="noopener">bioRxiv 2026</a>
+        </div>
+      </article>
+      <article class="card">
+        <span class="tag">Unified framework</span>
+        <h3>HyRes/iCon</h3>
+        <p>Proteins, nucleic acids, ions, and small molecules in one consistent intermediate-resolution framework, for simulating multicomponent condensates at near-cellular complexity.</p>
+        <div class="actions">
+          <a href="https://doi.org/10.64898/2026.09.15.751913" target="_blank" rel="noopener">bioRxiv 2026</a>
+          <a href="https://github.com/lslumass/HyresBuilder" target="_blank" rel="noopener">Setup tools</a>
+        </div>
+      </article>
+    </div>
+
+    <p class="more-tools"><strong>Other tools:</strong>
+      <a href="https://github.com/lslumass/iConMapper" target="_blank" rel="noopener">iConMapper</a> (machine-learning atomistic-to-coarse-grained mapping) ·
+      <a href="https://github.com/lslumass/SciKit" target="_blank" rel="noopener">SciKit</a> (analysis and plotting toolkit) ·
+      <a href="https://github.com/lslumass?tab=repositories" target="_blank" rel="noopener">all repositories →</a>
+    </p>
+  </div>
+</section>
+
+<section id="database">
+  <div class="wrap">
+    <p class="eyebrow">Database</p>
+    <h2>Open data for disordered proteins</h2>
+    <p class="lede">Large-scale simulation ensembles and curated experimental data, shared openly for analysis, benchmarking, and machine learning.</p>
+
+    <div class="db-rows">
+      <div class="db-row">
+        <div class="db-text">
+        <span class="tag">Simulation ensembles</span>
+        <h3>HyRes-IDRome</h3>
+        <p>HyRes conformational ensembles for 29,872 disordered proteins and regions from the human proteome and DisProt, with trajectories, radius of gyration, end-to-end distance, secondary structure, and sequence properties for each. Also available as predicted entries in the Protein Ensemble Database (PED 2027).</p>
+        <div class="actions">
+          <a href="https://huggingface.co/datasets/mdlab-um/HyRes-IDRome" target="_blank" rel="noopener">Hugging Face dataset</a>
+          <a href="https://proteinensemble.org/browse" target="_blank" rel="noopener">Browse in PED</a>
+        </div>
+        </div>
+        <figure class="db-fig"><img src="images/db_idp_ensemble.jpg" alt="HyRes conformational ensemble of a disordered protein region, with one conformation highlighted" width="560" height="560" loading="lazy"></figure>
+      </div>
+      <div class="db-row">
+        <div class="db-text">
+        <span class="tag">Amyloid fibrils</span>
+        <h3>Fuzzy Coat Atlas</h3>
+        <p>HyRes-sampled fuzzy coats across known amyloid fibril structures, with surface properties, internal interactions, and binding properties of the disordered regions that flank the fibril core.</p>
+        <div class="actions"><span class="soon">Coming soon</span></div>
+        </div>
+        <figure class="db-fig"><img src="images/db_fuzzy_coat.jpg" alt="Amyloid fibril core viewed along its axis, surrounded by its disordered fuzzy coat" width="356" height="356" loading="lazy"></figure>
+      </div>
+      <div class="db-row">
+        <div class="db-text">
+        <span class="tag">Experimental data</span>
+        <h3>Experimental reference data</h3>
+        <p>A curated collection of available experimental measurements on disordered proteins, including SAXS, smFRET, and NMR, for calibrating and benchmarking molecular models.</p>
+        <div class="actions"><span class="soon">In development</span></div>
+        </div>
+        <figure class="db-fig db-fig-sm"><img src="images/db_techniques.jpg" alt="Schematic of a disordered protein ensemble probed by SAXS, smFRET, and NMR" width="778" height="773" loading="lazy"></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="publications">
+  <div class="wrap">
+    <p class="eyebrow">Publications</p>
+    <h2>Publications</h2>
+
+    <div class="filters" role="group" aria-label="Filter publications by theme">
+      <button class="chip" type="button" data-filter="all" aria-pressed="true">All</button>
+      <button class="chip" type="button" data-filter="bio" aria-pressed="false">Biomolecules</button>
+      <button class="chip" type="button" data-filter="polymers" aria-pressed="false">Polymers</button>
+      <button class="chip" type="button" data-filter="collab" aria-pressed="false">Experimental collaborations</button>
+    </div>
+
+    <!-- To add a paper: copy one <li>; data-topics takes bio, polymers, and/or collab (one per filter button). -->
+    <ol class="pubs" reversed>
+      <li class="pub" data-topics="bio">
+        <span class="yr">2026</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1042/bcj20260251" target="_blank" rel="noopener">Recent advances in coarse-grained simulations of nucleic acid condensation</a></p>
+          <p class="authors">J. Fong Ng, <b>S. Li</b>, J. Chen</p>
+          <p class="venue">Biochemical Journal</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="bio">
+        <span class="yr">2026</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.64898/2026.09.14.751430" target="_blank" rel="noopener">Intermediate-resolution modeling of dynamic DNAs and their phase separation</a></p>
+          <p class="authors">J. F. Ng, <b>S. Li</b>, J. Chen</p>
+          <p class="venue">bioRxiv (preprint)</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="bio collab">
+        <span class="yr">2026</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.64898/2026.08.17.745126" target="_blank" rel="noopener">Antibiotic condensates activate magnesium signaling to drive drug tolerance</a></p>
+          <p class="authors">Y. Ma, W. Yu, E. Moon, <b>S. Li</b>, Z. Li, Y. Zhou, J. Wang, J. Chen, X. Liu, N. Wilson, …</p>
+          <p class="venue">bioRxiv (preprint)</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="bio collab">
+        <span class="yr">2026</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1021/jacsau.5c01563" target="_blank" rel="noopener">Lipid Composition Drastically Alters Tau–Membrane Interaction: Implications for Alzheimer’s Disease</a></p>
+          <p class="authors">A. Wu, N. Kandel, <b>S. Li</b>, T. A. Enoki, K. Hewes, J. Palumbo, M. Buttaci, K. Jones, …</p>
+          <p class="venue">JACS Au</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="bio collab">
+        <span class="yr">2026</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1021/jacsau.5c01266" target="_blank" rel="noopener">Phosphorylation of α-Synuclein Fibrils at S129 Changes DNAJB1 Binding as Probed by Solid-State NMR</a></p>
+          <p class="authors">S. Pacheco, D. S. Reselammal, <b>S. Li</b>, Q. Zhang, G. Velloor, J. Chen, A. B. Siemer</p>
+          <p class="venue">JACS Au</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="bio polymers collab">
+        <span class="yr">2026</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1016/j.bpj.2025.11.012" target="_blank" rel="noopener">Stepwise disassembly of supramolecular structures triggered by specific protein binding</a></p>
+          <p class="authors">Z. Jia, A. M. Chen, <b>S. Li</b>, S. Thayumanavan</p>
+          <p class="venue">Biophysical Journal</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="bio">
+        <span class="yr">2026</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.64898/2026.09.15.751913" target="_blank" rel="noopener">A unified intermediate-resolution framework for modeling biomolecular condensates at near-cellular complexity</a></p>
+          <p class="authors"><b>S. Li</b>, J. Fong Ng, J. Chen</p>
+          <p class="venue">bioRxiv (preprint)</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="bio">
+        <span class="yr">2026</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.64898/2026.06.23.734133" target="_blank" rel="noopener">HyRes: Accurate Physics-Based Simulation of Dynamic Protein Structures and Interactions in Complex Environments at Scale</a></p>
+          <p class="authors"><b>S. Li</b>, S. Barethiya, J. Chen</p>
+          <p class="venue">bioRxiv (preprint)</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="bio">
+        <span class="yr">2025</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1073/pnas.2504583122" target="_blank" rel="noopener">Driving forces of RNA condensation revealed through coarse-grained modeling with explicit Mg²⁺</a></p>
+          <p class="authors"><b>S. Li</b>, J. Chen</p>
+          <p class="venue">Proceedings of the National Academy of Sciences</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="bio polymers collab">
+        <span class="yr">2024</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1021/acs.biomac.4c00850" target="_blank" rel="noopener">Polymers for disrupting protein-protein interactions–where are we and where we want to be</a></p>
+          <p class="authors">S. P. Le, J. Krishna, P. Gupta, R. Dutta, <b>S. Li</b>, J. Chen, S. Thayumanavan</p>
+          <p class="venue">Biomacromolecules</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="bio">
+        <span class="yr">2024</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1042/bst20230618" target="_blank" rel="noopener">Backbone interactions and secondary structures in phase separation of disordered proteins</a></p>
+          <p class="authors"><b>S. Li</b>, Y. Zhang, J. Chen</p>
+          <p class="venue">Biochemical Society Transactions</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="bio">
+        <span class="yr">2024</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1021/jacs.3c09195" target="_blank" rel="noopener">Toward accurate simulation of coupling between protein secondary structure and phase separation</a></p>
+          <p class="authors">Y. Zhang, <b>S. Li</b>, X. Gong, J. Chen</p>
+          <p class="venue">Journal of the American Chemical Society</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="polymers" data-older>
+        <span class="yr">2023</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1021/acs.macromol.2c02106" target="_blank" rel="noopener">The evolution of hydrogen bond network in nafion via molecular dynamics simulation</a></p>
+          <p class="authors">R. Cui, <b>S. Li</b>, C. Yu, Y. Zhou</p>
+          <p class="venue">Macromolecules</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="polymers collab" data-older>
+        <span class="yr">2022</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1002/anie.202213178" target="_blank" rel="noopener">Self‐Assembly of Peapod‐like Micrometer Tubes from a Planet‐Satellite‐type Supramolecular Megamer</a></p>
+          <p class="authors">F. Xu, K. Li, <b>S. Li</b>, C. Li, C. Yu, Y. Wang, W. Jiang, S. Lin, Y. Mai, Y. Zhou</p>
+          <p class="venue">Angewandte Chemie International Edition</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="polymers collab" data-older>
+        <span class="yr">2022</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1002/marc.202200437" target="_blank" rel="noopener">One‐Dimensional Helical Nanostructures from the Hierarchical Self‐Assembly of an Achiral “Rod–Coil” Alternating Copolymer</a></p>
+          <p class="authors">J. Zhang, <b>S. Li</b>, Y. Yin, L. Xiang, F. Xu, Y. Mai</p>
+          <p class="venue">Macromolecular Rapid Communications</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="polymers collab" data-older>
+        <span class="yr">2022</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1002/anie.202204440" target="_blank" rel="noopener">Membrane‐Bound Inward‐Growth of Artificial Cytoskeletons and Their Selective Disassembly</a></p>
+          <p class="authors">Q. Xu, <b>S. Li</b>, M. Qi, J. Gao, C. Chen, P. Huang, Y. Wang, C. Yu, W. Huang, …</p>
+          <p class="venue">Angewandte Chemie International Edition</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="polymers" data-older>
+        <span class="yr">2022</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1016/j.memsci.2022.120328" target="_blank" rel="noopener">Understanding the mechanism of nitrogen transport in the perfluorinated sulfonic-acid hydrated membranes via molecular dynamics simulations</a></p>
+          <p class="authors">R. Cui, <b>S. Li</b>, C. Yu, Y. Wang, Y. Zhou</p>
+          <p class="venue">Journal of Membrane Science</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="polymers" data-older>
+        <span class="yr">2022</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1021/acs.jpcb.1c09406" target="_blank" rel="noopener">Coarse-grained model of thiol–epoxy-based alternating copolymers in explicit solvents</a></p>
+          <p class="authors"><b>S. Li</b>, R. Cui, C. Yu, Y. Zhou</p>
+          <p class="venue">The Journal of Physical Chemistry B</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="polymers collab" data-older>
+        <span class="yr">2021</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1021/acs.langmuir.1c02382" target="_blank" rel="noopener">pH-controlled stereoregular polymerization of poly (methyl methacrylate) in vesicle membranes</a></p>
+          <p class="authors">B. Cai, <b>S. Li</b>, W. Jiang, Y. Zhou</p>
+          <p class="venue">Langmuir</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="polymers collab" data-older>
+        <span class="yr">2021</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1021/acsmacrolett.1c00301" target="_blank" rel="noopener">Asymmetric vesicles self-assembled by amphiphilic sequence-controlled polymers</a></p>
+          <p class="authors">P. Huang, M. Qi, C. Chen, F. Xu, <b>S. Li</b>, Q. Xu, H. Pan, Y. Wang, C. Yu, S. Zhang, …</p>
+          <p class="venue">ACS Macro Letters</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="polymers" data-older>
+        <span class="yr">2020</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1039/d0cp04561f" target="_blank" rel="noopener">Computational design of Janus polymersomes with controllable fission from double emulsions</a></p>
+          <p class="authors"><b>S. Li</b>, C. Yu, Y. Zhou</p>
+          <p class="venue">Physical Chemistry Chemical Physics</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="polymers" data-older>
+        <span class="yr">2020</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1039/d0cp03864d" target="_blank" rel="noopener">In silico study of structure and water dynamics in CNT/polyamide nanocomposite reverse osmosis membranes</a></p>
+          <p class="authors">Q. Gu, K. Li, <b>S. Li</b>, R. Cui, L. Liu, C. Yu, Y. Wang, Y. Zhou, G. Xiao</p>
+          <p class="venue">Physical Chemistry Chemical Physics</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="polymers collab" data-older>
+        <span class="yr">2020</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1038/s41467-020-15427-1" target="_blank" rel="noopener">In situ supramolecular polymerization-enhanced self-assembly of polymer vesicles for highly efficient photothermal therapy</a></p>
+          <p class="authors">Y. Liu, H. Wang, <b>S. Li</b>, C. Chen, L. Xu, P. Huang, F. Liu, Y. Su, M. Qi, C. Yu, …</p>
+          <p class="venue">Nature Communications</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="polymers" data-older>
+        <span class="yr">2020</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1002/pol.20190163" target="_blank" rel="noopener">Multilayer onion‐like vesicles self‐assembled from amphiphilic hyperbranched multiarm copolymers via simulation</a></p>
+          <p class="authors">T. Hao, H. Tan, <b>S. Li</b>, Y. Wang, Z. Zhou, C. Yu, Y. Zhou, D. Yan</p>
+          <p class="venue">Journal of Polymer Science</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="polymers" data-older>
+        <span class="yr">2020</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1039/d0cp00383b" target="_blank" rel="noopener">High-χ alternating copolymers for accessing sub-5 nm domains via simulations</a></p>
+          <p class="authors"><b>S. Li</b>, Q. Xu, K. Li, C. Yu, Y. Zhou</p>
+          <p class="venue">Physical Chemistry Chemical Physics</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="polymers" data-older>
+        <span class="yr">2019</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1039/c9cp05577k" target="_blank" rel="noopener">Solution self-assembly behavior of rod-alt-coil alternating copolymers via simulations</a></p>
+          <p class="authors"><b>S. Li</b>, K. Li, Q. Xu, Y. Wang, C. Yu, Y. Zhou</p>
+          <p class="venue">Physical Chemistry Chemical Physics</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="polymers" data-older>
+        <span class="yr">2019</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1002/jcc.26015" target="_blank" rel="noopener">MembrFactory: a force field and composition double independent universal tool for constructing polyamide reverse osmosis membranes</a></p>
+          <p class="authors">K. Li, <b>S. Li</b>, W. Huang, C. Yu, Y. Zhou</p>
+          <p class="venue">Journal of Computational Chemistry</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="polymers" data-older>
+        <span class="yr">2019</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1021/acs.jpcb.9b07685" target="_blank" rel="noopener">Multigeometry nanoparticles from the orthogonal self-assembly of block alternating copolymers via simulation</a></p>
+          <p class="authors"><b>S. Li</b>, Q. Xu, K. Li, Y. Wang, C. Yu, Y. Zhou</p>
+          <p class="venue">The Journal of Physical Chemistry B</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="polymers" data-older>
+        <span class="yr">2019</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1039/c9cp03798e" target="_blank" rel="noopener">Molecular dynamics simulation studies of the structure and antifouling performance of a gradient polyamide membrane</a></p>
+          <p class="authors">K. Li, <b>S. Li</b>, L. Liu, W. Huang, Y. Wang, C. Yu, Y. Zhou</p>
+          <p class="venue">Physical Chemistry Chemical Physics</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="polymers" data-older>
+        <span class="yr">2019</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1021/acs.langmuir.8b02206" target="_blank" rel="noopener">Shape transformations of vesicles self-assembled from amphiphilic hyperbranched multiarm copolymers via simulation</a></p>
+          <p class="authors">H. Tan, <b>S. Li</b>, K. Li, C. Yu, Z. Lu, Y. Zhou</p>
+          <p class="venue">Langmuir</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="polymers" data-older>
+        <span class="yr">2019</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1002/chem.201804067" target="_blank" rel="noopener">Self‐assembly of amphiphilic alternating copolymers</a></p>
+          <p class="authors">Q. Xu, <b>S. Li</b>, C. Yu, Y. Zhou</p>
+          <p class="venue">Chemistry – A European Journal</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="polymers" data-older>
+        <span class="yr">2018</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1039/c8cp05825c" target="_blank" rel="noopener">Understanding the temperature effect on transport dynamics and structures in polyamide reverse osmosis system via molecular dynamics simulations</a></p>
+          <p class="authors">K. Li, L. Liu, H. Wu, <b>S. Li</b>, C. Yu, Y. Zhou, W. Huang, D. Yan</p>
+          <p class="venue">Physical Chemistry Chemical Physics</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="polymers" data-older>
+        <span class="yr">2018</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1007/s11426-018-9360-3" target="_blank" rel="noopener">Phase diagrams, mechanisms and unique characteristics of alternating-structured polymer self-assembly via simulations</a></p>
+          <p class="authors"><b>S. Li</b>, C. Yu, Y. Zhou</p>
+          <p class="venue">Science China Chemistry</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="polymers collab" data-older>
+        <span class="yr">2018</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1002/anie.201802833" target="_blank" rel="noopener">Emulsion‐assisted polymerization‐induced hierarchical self‐assembly of giant sea urchin‐like aggregates on a large scale</a></p>
+          <p class="authors">Q. Xu, T. Huang, <b>S. Li</b>, K. Li, C. Li, Y. Liu, Y. Wang, C. Yu, Y. Zhou</p>
+          <p class="venue">Angewandte Chemie International Edition</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="polymers" data-older>
+        <span class="yr">2017</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1021/acs.langmuir.7b02411" target="_blank" rel="noopener">Asymmetric polymersomes from an oil-in-oil emulsion: a computer simulation study</a></p>
+          <p class="authors"><b>S. Li</b>, Y. Zhang, H. Liu, C. Yu, Y. Zhou, D. Yan</p>
+          <p class="venue">Langmuir</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="polymers collab" data-older>
+        <span class="yr">2017</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1039/c7py00908a" target="_blank" rel="noopener">Self-assembly and functionalization of alternating copolymer vesicles</a></p>
+          <p class="authors">C. Li, C. Chen, <b>S. Li</b>, T. Rasheed, P. Huang, T. Huang, Y. Zhang, W. Huang, …</p>
+          <p class="venue">Polymer Chemistry</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="polymers" data-older>
+        <span class="yr">2017</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1021/acs.langmuir.6b03480" target="_blank" rel="noopener">Computer simulation studies on the pH-responsive self-assembly of amphiphilic carboxy-terminated polyester dendrimers in aqueous solution</a></p>
+          <p class="authors">C. Yu, L. Ma, K. Li, <b>S. Li</b>, Y. Liu, L. Liu, Y. Zhou, D. Yan</p>
+          <p class="venue">Langmuir</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="polymers" data-older>
+        <span class="yr">2016</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1039/c6cp03726g" target="_blank" rel="noopener">Molecular dynamics simulation studies of hyperbranched polyglycerols and their encapsulation behaviors of small drug molecules</a></p>
+          <p class="authors">C. Yu, L. Ma, K. Li, <b>S. Li</b>, Y. Liu, Y. Zhou, D. Yan</p>
+          <p class="venue">Physical Chemistry Chemical Physics</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="polymers collab" data-older>
+        <span class="yr">2016</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1039/c6cc03595g" target="_blank" rel="noopener">A srikaya-like light-harvesting antenna based on graphene quantum dots and porphyrin unimolecular micelles</a></p>
+          <p class="authors">Y. Liu, <b>S. Li</b>, K. Li, Y. Zheng, M. Zhang, C. Cai, C. Yu, Y. Zhou, D. Yan</p>
+          <p class="venue">Chemical Communications</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="polymers collab" data-older>
+        <span class="yr">2016</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1039/c6cc03445d" target="_blank" rel="noopener">Light-triggered reversible “one-to-two” morphological transition in a “latent double-amphiphilic” linear-hyperbranched supramolecular block copolymer</a></p>
+          <p class="authors">W. Jiang, Y. Liu, C. Yu, <b>S. Li</b>, Y. Li, Y. Zhou</p>
+          <p class="venue">Chemical Communications</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="polymers" data-older>
+        <span class="yr">2016</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1038/srep26264" target="_blank" rel="noopener">HBP Builder: A Tool to Generate Hyperbranched Polymers and Hyperbranched Multi-Arm Copolymers for Coarse-grained and Fully Atomistic Molecular Simulations</a></p>
+          <p class="authors">C. Yu, L. Ma, <b>S. Li</b>, H. Tan, Y. Zhou, D. Yan</p>
+          <p class="venue">Scientific Reports</p>
+        </div>
+      </li>
+      <li class="pub" data-topics="polymers collab" data-older>
+        <span class="yr">2016</span>
+        <div>
+          <p class="title"><a href="https://doi.org/10.1021/acs.langmuir.5b04478" target="_blank" rel="noopener">Hybrid vesicles with alterable fully covered armors of nanoparticles: fabrication, catalysis, and surface-enhanced Raman scattering</a></p>
+          <p class="authors">T. Huang, H. Li, L. Huang, <b>S. Li</b>, K. Li, Y. Zhou</p>
+          <p class="venue">Langmuir</p>
+        </div>
+      </li>
+    </ol>
+    <button class="more-pubs" type="button" aria-expanded="false">Show earlier publications (30)</button>
+    <p class="full-list"><a href="https://scholar.google.com/citations?user=8XlBe40AAAAJ&hl=en" target="_blank" rel="noopener">View on Google Scholar →</a></p>
+  </div>
+</section>
+
+
+<section id="contact">
+  <div class="wrap">
+    <p class="eyebrow">Contact</p>
+    <h2>Get in touch</h2>
+    <p class="lede">Happy to talk about collaborations, using HyRes or iCon models, or anything related to biomolecular and polymer phase behavior.</p>
+    <div class="contact-grid">
+      <a class="btn" href="mailto:shanlongli@umass.edu">shanlongli@umass.edu</a>
+      <a class="btn" href="https://github.com/lslumass" target="_blank" rel="noopener">github.com/lslumass</a>
+      <a class="btn" href="https://scholar.google.com/citations?user=8XlBe40AAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">© 2026 Shanlong Li · University of Massachusetts Amherst</div>
+</footer>
+
+<script>
+  (function () {
+    var chips = document.querySelectorAll('.chip');
+    var pubs = document.querySelectorAll('.pub');
+    var more = document.querySelector('.more-pubs');
+    var filter = 'all', showAll = false;
+    var label = more.textContent;
+    function render() {
+      pubs.forEach(function (p) {
+        var match = filter === 'all' || p.dataset.topics.split(' ').indexOf(filter) !== -1;
+        p.hidden = !match || (!showAll && p.hasAttribute('data-older'));
+      });
+    }
+    chips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        filter = chip.dataset.filter;
+        chips.forEach(function (c) { c.setAttribute('aria-pressed', String(c === chip)); });
+        render();
+      });
+    });
+    more.addEventListener('click', function () {
+      showAll = !showAll;
+      more.setAttribute('aria-expanded', String(showAll));
+      more.textContent = showAll ? 'Show fewer' : label;
+      render();
+    });
+    render();
+  })();
+</script>
 </body>
 </html>
