@@ -121,6 +121,11 @@
   .tile img { aspect-ratio: 1; object-fit: contain; width: 100%; }
   .tile figcaption { text-transform: none; letter-spacing: 0; font-size: .85rem; font-weight: 600; margin: 8px 2px 0; display: flex; flex-direction: column; gap: 1px; }
   .tile figcaption a { font-weight: 500; font-size: .8rem; color: #0e6e78; }
+  .collab-grid { margin: 10px 0 26px; }
+  .collab-card figcaption { display: flex; flex-direction: column; gap: 1px; }
+  .collab-card figcaption .lab { font-weight: 400; color: var(--muted); font-size: .8rem; }
+  .collab-card figcaption .refs { font-weight: 500; font-size: .8rem; }
+  #collaborations .tiles-label { margin: 0; }
   .tiles-label { font-size: .78rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 6px 0 -8px; }
   .tile-groups { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
   .tile-groups .tiles-label { margin: 0 0 8px; }
@@ -188,8 +193,9 @@
     .wrap { padding: 0 16px; }
     .nav .brand { display: none; }
     .nav .wrap { justify-content: flex-start; }
-    .nav ul { gap: 11px; }
-    .nav ul a { font-size: .8rem; }
+    .nav .wrap { height: auto; padding-top: 8px; padding-bottom: 8px; }
+    .nav ul { gap: 4px 14px; flex-wrap: wrap; overflow: visible; }
+    .nav ul a { font-size: .82rem; }
     .hero { padding: 40px 0; }
     .hero .wrap { grid-template-columns: 1fr; gap: 20px; }
     .hero img { width: 120px; height: 120px; }
@@ -209,6 +215,7 @@
     <a class="brand" href="#top">Shanlong Li</a>
     <ul>
       <li><a href="#research">Research</a></li>
+      <li><a href="#collaborations">Collaborations</a></li>
       <li><a href="#models">Models</a></li>
       <li><a href="#database">Database</a></li>
       <li><a href="#publications">Publications</a></li>
@@ -285,65 +292,59 @@
     <div class="theme">
       <div>
         <span class="num">04</span>
-        <h3>Integrating simulation and experiment</h3>
-        <p>Close collaboration with experimental labs runs through all of my work. Simulations provide molecular-level explanations of experimental observations and testable predictions, across biomolecular recognition, membrane interactions, and condensation in cells.</p>
-        <p class="key">Related work: <a href="https://doi.org/10.1021/jacsau.5c01266" target="_blank" rel="noopener">JACS Au 2026</a> · <a href="https://doi.org/10.1021/jacsau.5c01563" target="_blank" rel="noopener">JACS Au 2026</a> · <a href="https://doi.org/10.1016/j.bpj.2025.11.012" target="_blank" rel="noopener">Biophys J 2026</a> · <a href="https://doi.org/10.64898/2026.08.17.745126" target="_blank" rel="noopener">bioRxiv 2026</a> · <a href="https://doi.org/10.1021/acs.biomac.4c00850" target="_blank" rel="noopener">Biomacromolecules 2024</a></p>
-      </div>
-      <div class="figs">
-        <figure class="fig-md"><img src="images/collab_pair.jpg" alt="Chaperones binding the fuzzy coat of an α-synuclein fibril, and an antibiotic-induced RNA condensate" width="896" height="560" loading="lazy"></figure>
-      </div>
-    </div>
-
-    <div class="theme theme-wide">
-      <div>
-        <span class="num">05</span>
         <h3>Polymer self-assembly and materials design</h3>
         <p>The same physics governs synthetic materials. I use simulation to understand how polymer sequence and architecture control self-assembly and phase behavior, and to design new nanostructures for smart materials, working with experimental groups to test the predictions.</p>
+        <p class="key">Related work: <a href="https://doi.org/10.1007/s11426-018-9360-3" target="_blank" rel="noopener">Sci China Chem 2019</a> · <a href="https://doi.org/10.1039/c9cp05577k" target="_blank" rel="noopener">PCCP 2019</a> · <a href="https://doi.org/10.1021/acs.jpcb.9b07685" target="_blank" rel="noopener">J Phys Chem B 2019</a> · <a href="https://doi.org/10.1039/d0cp00383b" target="_blank" rel="noopener">PCCP 2020</a></p>
       </div>
-      <div class="tile-groups">
-        <div>
-          <p class="tiles-label">Simulation</p>
-          <div class="tiles tiles-compact">
-        <figure class="tile">
-          <img src="images/sim_coil_alt_coil.jpg" alt="Morphologies self-assembled from coil-alt-coil copolymers" width="600" height="600" loading="lazy">
-          <figcaption><a href="https://doi.org/10.1007/s11426-018-9360-3" target="_blank" rel="noopener" title="Sci China Chem 2019">Coil-<i>alt</i>-coil copolymers</a></figcaption>
+      <div class="figs">
+        <figure class="fig-xs fig-sm"><img src="images/poly_sim_single.jpg" alt="Morphologies self-assembled from coil-alt-coil alternating copolymers in simulation" width="480" height="480" loading="lazy"></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="collaborations">
+  <div class="wrap">
+    <p class="eyebrow">Collaborations</p>
+    <h2>Working with experimental labs</h2>
+    <p class="lede">Close collaboration with experimentalists runs through my work. Simulations provide molecular-level explanations of what experiments observe and make testable predictions, from biomolecular recognition and condensation in cells to the self-assembly of new materials.</p>
+    <p class="tiles-label">Biomolecules</p>
+    <div class="tiles collab-grid">
+        <figure class="tile collab-card">
+          <img src="images/collab_fibril_chaperone.jpg" alt="Chaperones binding the fuzzy coat of an α-synuclein fibril" width="600" height="600" loading="lazy">
+          <figcaption><span>Fibril–chaperone binding</span><span class="lab">Siemer lab</span><span class="refs"><a href="https://doi.org/10.1021/jacsau.5c01266" target="_blank" rel="noopener">JACS Au 2026</a></span></figcaption>
         </figure>
-        <figure class="tile">
-          <img src="images/sim_rod_alt_coil.jpg" alt="Morphologies self-assembled from rod-alt-coil copolymers" width="600" height="600" loading="lazy">
-          <figcaption><a href="https://doi.org/10.1039/c9cp05577k" target="_blank" rel="noopener" title="PCCP 2019">Rod-<i>alt</i>-coil copolymers</a></figcaption>
+        <figure class="tile collab-card">
+          <img src="images/collab_tau_membrane.jpg" alt="Tau protein interacting with a lipid bilayer" width="600" height="600" loading="lazy">
+          <figcaption><span>Tau–membrane interactions</span><span class="lab">Wang lab</span><span class="refs"><a href="https://doi.org/10.1021/jacsau.5c01563" target="_blank" rel="noopener">JACS Au 2026</a></span></figcaption>
         </figure>
-        <figure class="tile">
-          <img src="images/sim_alt_block_alt.jpg" alt="Complex nanoparticles from blocked alternating copolymers" width="600" height="600" loading="lazy">
-          <figcaption><a href="https://doi.org/10.1021/acs.jpcb.9b07685" target="_blank" rel="noopener" title="J Phys Chem B 2019">Blocked alternating copolymers</a></figcaption>
+        <figure class="tile collab-card">
+          <img src="images/collab_protein_polymer.jpg" alt="Polymer chain wrapping a protein surface" width="600" height="600" loading="lazy">
+          <figcaption><span>Protein–polymer binding</span><span class="lab">Thayumanavan lab</span><span class="refs"><a href="https://doi.org/10.1021/acs.biomac.4c00850" target="_blank" rel="noopener">Biomacromolecules 2024</a> · <a href="https://doi.org/10.1016/j.bpj.2025.11.012" target="_blank" rel="noopener">Biophys J 2026</a></span></figcaption>
         </figure>
-        <figure class="tile">
-          <img src="images/sim_high_chi.jpg" alt="Sub-5 nm patterns from high-χ alternating copolymers" width="600" height="600" loading="lazy">
-          <figcaption><a href="https://doi.org/10.1039/d0cp00383b" target="_blank" rel="noopener" title="PCCP 2020">High-χ sub-5 nm patterns</a></figcaption>
+        <figure class="tile collab-card">
+          <img src="images/collab_antibiotic_rna.jpg" alt="Antibiotic-induced RNA condensate" width="600" height="600" loading="lazy">
+          <figcaption><span>Antibiotic-induced RNA condensates</span><span class="lab">Süel and Dai labs</span><span class="refs"><a href="https://doi.org/10.64898/2026.08.17.745126" target="_blank" rel="noopener">bioRxiv 2026</a></span></figcaption>
         </figure>
-          </div>
-        </div>
-        <div>
-          <p class="tiles-label">With experimental labs</p>
-          <div class="tiles tiles-compact">
-        <figure class="tile">
-          <img src="images/poly_porphyrin.jpg" alt="Porphyrin arrangement in supramolecular polymer vesicles, with chemical structure and microscopy" width="600" height="600" loading="lazy">
-          <figcaption><a href="https://doi.org/10.1038/s41467-020-15427-1" target="_blank" rel="noopener" title="Nat Commun 2020">Porphyrin arrangement</a></figcaption>
+    </div>
+    <p class="tiles-label">Polymers and materials</p>
+    <div class="tiles collab-grid">
+        <figure class="tile collab-card">
+          <img src="images/poly_porphyrin.jpg" alt="Porphyrin arrangement in supramolecular polymer vesicles" width="600" height="600" loading="lazy">
+          <figcaption><span>Porphyrin-containing vesicles</span><span class="lab">Zhou group</span><span class="refs"><a href="https://doi.org/10.1038/s41467-020-15427-1" target="_blank" rel="noopener">Nat Commun 2020</a></span></figcaption>
         </figure>
-        <figure class="tile">
+        <figure class="tile collab-card">
           <img src="images/poly_hierarchical.jpg" alt="Hierarchical self-assembly into peapod-like micrometer tubes" width="600" height="600" loading="lazy">
-          <figcaption><a href="https://doi.org/10.1002/anie.202213178" target="_blank" rel="noopener" title="Angew Chem 2022">Hierarchical self-assembly</a></figcaption>
+          <figcaption><span>Peapod-like micrometer tubes</span><span class="lab">Zhou and Mai groups</span><span class="refs"><a href="https://doi.org/10.1002/anie.202213178" target="_blank" rel="noopener">Angew Chem 2022</a></span></figcaption>
         </figure>
-        <figure class="tile">
-          <img src="images/poly_nanosheet.jpg" alt="Nanostructure formation from a rod–coil alternating copolymer" width="600" height="600" loading="lazy">
-          <figcaption><a href="https://doi.org/10.1002/marc.202200437" target="_blank" rel="noopener" title="Macromol Rapid Commun 2022">Nanosheet formation</a></figcaption>
+        <figure class="tile collab-card">
+          <img src="images/poly_nanosheet.jpg" alt="Helical nanostructures from a rod–coil alternating copolymer" width="600" height="600" loading="lazy">
+          <figcaption><span>Helical nanostructures</span><span class="lab">Mai group</span><span class="refs"><a href="https://doi.org/10.1002/marc.202200437" target="_blank" rel="noopener">Macromol Rapid Commun 2022</a></span></figcaption>
         </figure>
-        <figure class="tile">
+        <figure class="tile collab-card">
           <img src="images/poly_photofission.jpg" alt="Light-triggered fission of polymersomes, from microscopy and simulation" width="600" height="600" loading="lazy">
-          <figcaption><span>Polymersome photo-fission</span></figcaption>
+          <figcaption><span>Polymersome photo-fission</span><span class="lab">Ph.D. experiments and simulation</span><span class="refs"></span></figcaption>
         </figure>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
