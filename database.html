@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Database — Shanlong Li</title>
+<meta name="description" content="Shanlong Li, postdoctoral researcher at UMass Amherst, develops physics-based multiscale models to study biomolecular condensates, amyloid fibrils, and polymer self-assembly.">
+<meta property="og:title" content="Database — Shanlong Li">
+<meta property="og:description" content="Physics-based multiscale modeling of how biomolecules and polymers self-assemble, phase separate, and aggregate.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://lslumass.github.io/database.html">
+<meta property="og:image" content="https://lslumass.github.io/images/profile.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+
+<nav class="nav" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="index.html">Shanlong Li</a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="collaborations.html">Collaborations</a></li>
+      <li><a href="models.html">Models</a></li>
+      <li><a href="database.html" aria-current="page">Database</a></li>
+      <li><a href="publications.html">Publications</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+
+<section id="database" class="page-top">
+  <div class="wrap">
+    <p class="eyebrow">Database</p>
+    <h2>Open data for disordered proteins</h2>
+    <p class="lede">Large-scale simulation ensembles and curated experimental data, shared openly for analysis, benchmarking, and machine learning.</p>
+
+    <div class="db-rows">
+      <div class="db-row">
+        <div class="db-text">
+        <span class="tag">Simulation ensembles</span>
+        <h3>HyRes-IDRome</h3>
+        <p>HyRes conformational ensembles for 29,872 disordered proteins and regions from the human proteome and DisProt, with trajectories, radius of gyration, end-to-end distance, secondary structure, and sequence properties for each. Also available as predicted entries in the Protein Ensemble Database (PED 2027).</p>
+        <div class="actions">
+          <a href="https://huggingface.co/datasets/mdlab-um/HyRes-IDRome" target="_blank" rel="noopener">Hugging Face dataset</a>
+          <a href="https://proteinensemble.org/browse" target="_blank" rel="noopener">Browse in PED</a>
+        </div>
+        </div>
+        <figure class="db-fig"><img src="images/db_idp_ensemble.jpg" alt="HyRes conformational ensemble of a disordered protein region, with one conformation highlighted" width="560" height="560" loading="lazy"></figure>
+      </div>
+      <div class="db-row">
+        <div class="db-text">
+        <span class="tag">Amyloid fibrils</span>
+        <h3>Fuzzy Coat Atlas</h3>
+        <p>HyRes-sampled fuzzy coats across known amyloid fibril structures, with surface properties, internal interactions, and binding properties of the disordered regions that flank the fibril core.</p>
+        <div class="actions"><span class="soon">Coming soon</span></div>
+        </div>
+        <figure class="db-fig"><img src="images/db_fuzzy_coat.jpg" alt="Amyloid fibril core viewed along its axis, surrounded by its disordered fuzzy coat" width="356" height="356" loading="lazy"></figure>
+      </div>
+      <div class="db-row">
+        <div class="db-text">
+        <span class="tag">Experimental data</span>
+        <h3>Experimental reference data</h3>
+        <p>A curated collection of available experimental measurements on disordered proteins, including SAXS, smFRET, and NMR, for calibrating and benchmarking molecular models.</p>
+        <div class="actions"><span class="soon">In development</span></div>
+        </div>
+        <figure class="db-fig db-fig-sm"><img src="images/db_techniques.jpg" alt="Schematic of a disordered protein ensemble probed by SAXS, smFRET, and NMR" width="778" height="773" loading="lazy"></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">© 2026 Shanlong Li · University of Massachusetts Amherst</div>
+</footer>
+</body>
+</html>

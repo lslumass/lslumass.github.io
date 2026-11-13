@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Models — Shanlong Li</title>
+<meta name="description" content="Shanlong Li, postdoctoral researcher at UMass Amherst, develops physics-based multiscale models to study biomolecular condensates, amyloid fibrils, and polymer self-assembly.">
+<meta property="og:title" content="Models — Shanlong Li">
+<meta property="og:description" content="Physics-based multiscale modeling of how biomolecules and polymers self-assemble, phase separate, and aggregate.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://lslumass.github.io/models.html">
+<meta property="og:image" content="https://lslumass.github.io/images/profile.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+
+<nav class="nav" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="index.html">Shanlong Li</a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="collaborations.html">Collaborations</a></li>
+      <li><a href="models.html" aria-current="page">Models</a></li>
+      <li><a href="database.html">Database</a></li>
+      <li><a href="publications.html">Publications</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+
+<section id="models" class="page-top">
+  <div class="wrap">
+    <p class="eyebrow">Models</p>
+    <h2>Open models you can run</h2>
+    <p class="lede">All models are open source, with setup tools and tutorials on GitHub.</p>
+
+    <div class="cards">
+      <article class="card">
+        <span class="tag">Proteins</span>
+        <h3>HyRes</h3>
+        <p>Hybrid-resolution protein model that captures secondary structure and its coupling to phase separation, with GPU-accelerated simulation of dynamic proteins in complex environments.</p>
+        <div class="actions">
+          <a href="https://doi.org/10.1021/jacs.3c09195" target="_blank" rel="noopener">JACS 2024</a>
+          <a href="https://doi.org/10.64898/2026.06.23.734133" target="_blank" rel="noopener">HyRes preprint 2026</a>
+          <a href="https://github.com/lslumass/HyRes_GPU" target="_blank" rel="noopener">Tutorial</a>
+          <a href="https://github.com/lslumass/HyresBuilder" target="_blank" rel="noopener">HyresBuilder</a>
+        </div>
+      </article>
+      <article class="card">
+        <span class="tag">RNA</span>
+        <h3>iConRNA</h3>
+        <p>Intermediate-resolution RNA model with explicit Mg²⁺ that reveals the driving forces of RNA condensation, including base pairing and stacking.</p>
+        <div class="actions">
+          <a href="https://doi.org/10.1073/pnas.2504583122" target="_blank" rel="noopener">PNAS 2025</a>
+          <a href="https://github.com/lslumass/iConRNA" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </article>
+      <article class="card">
+        <span class="tag">DNA</span>
+        <h3>iConDNA</h3>
+        <p>Intermediate-resolution model of dynamic DNA structures and their phase separation, compatible with HyRes and iConRNA.</p>
+        <div class="actions">
+          <a href="https://doi.org/10.64898/2026.09.14.751430" target="_blank" rel="noopener">bioRxiv 2026</a>
+        </div>
+      </article>
+      <article class="card">
+        <span class="tag">Unified framework</span>
+        <h3>HyRes/iCon</h3>
+        <p>Proteins, nucleic acids, ions, and small molecules in one consistent intermediate-resolution framework, for simulating multicomponent condensates at near-cellular complexity.</p>
+        <div class="actions">
+          <a href="https://doi.org/10.64898/2026.09.15.751913" target="_blank" rel="noopener">bioRxiv 2026</a>
+          <a href="https://github.com/lslumass/HyresBuilder" target="_blank" rel="noopener">Setup tools</a>
+        </div>
+      </article>
+    </div>
+
+    <p class="more-tools"><strong>Other tools:</strong>
+      <a href="https://github.com/lslumass/iConMapper" target="_blank" rel="noopener">iConMapper</a> (machine-learning atomistic-to-coarse-grained mapping) ·
+      <a href="https://github.com/lslumass/SciKit" target="_blank" rel="noopener">SciKit</a> (analysis and plotting toolkit) ·
+      <a href="https://github.com/lslumass?tab=repositories" target="_blank" rel="noopener">all repositories →</a>
+    </p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">© 2026 Shanlong Li · University of Massachusetts Amherst</div>
+</footer>
+</body>
+</html>
