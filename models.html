@@ -38,10 +38,11 @@
   <div class="wrap">
     <p class="eyebrow">Models</p>
     <h2>Open models you can run</h2>
-    <p class="lede">All models are open source, with setup tools and tutorials on GitHub.</p>
+    <p class="lede">All models are open source and integrated in <a href="https://github.com/lslumass/HyresBuilder" target="_blank" rel="noopener">HyresBuilder</a>, which sets up and runs simulations on <a href="https://openmm.org" target="_blank" rel="noopener">OpenMM</a>, with tutorials on GitHub.</p>
 
-    <div class="cards">
+    <div class="cards model-rows">
       <article class="card">
+        <div class="card-body">
         <span class="tag">Proteins</span>
         <h3>HyRes</h3>
         <p>Hybrid-resolution protein model that captures secondary structure and its coupling to phase separation, with GPU-accelerated simulation of dynamic proteins in complex environments.</p>
@@ -51,8 +52,11 @@
           <a href="https://github.com/lslumass/HyRes_GPU" target="_blank" rel="noopener">Tutorial</a>
           <a href="https://github.com/lslumass/HyresBuilder" target="_blank" rel="noopener">HyresBuilder</a>
         </div>
+        </div>
+        <figure class="card-fig"><img src="images/models/hyres.jpg" alt="HyRes bead mapping of a peptide" loading="lazy"></figure>
       </article>
       <article class="card">
+        <div class="card-body">
         <span class="tag">RNA</span>
         <h3>iConRNA</h3>
         <p>Intermediate-resolution RNA model with explicit Mg²⁺ that reveals the driving forces of RNA condensation, including base pairing and stacking.</p>
@@ -60,16 +64,22 @@
           <a href="https://doi.org/10.1073/pnas.2504583122" target="_blank" rel="noopener">PNAS 2025</a>
           <a href="https://github.com/lslumass/iConRNA" target="_blank" rel="noopener">GitHub</a>
         </div>
+        </div>
+        <figure class="card-fig"><img src="images/models/iconrna.jpg" alt="iConRNA bead mapping of an adenosine nucleotide" loading="lazy"></figure>
       </article>
       <article class="card">
+        <div class="card-body">
         <span class="tag">DNA</span>
         <h3>iConDNA</h3>
         <p>Intermediate-resolution model of dynamic DNA structures and their phase separation, compatible with HyRes and iConRNA.</p>
         <div class="actions">
           <a href="https://doi.org/10.64898/2026.09.14.751430" target="_blank" rel="noopener">bioRxiv 2026</a>
         </div>
+        </div>
+        <figure class="card-fig"><img src="images/models/icondna.jpg" alt="iConDNA bead mapping of a thymidine nucleotide" loading="lazy"></figure>
       </article>
       <article class="card">
+        <div class="card-body">
         <span class="tag">Unified framework</span>
         <h3>HyRes/iCon</h3>
         <p>Proteins, nucleic acids, ions, and small molecules in one consistent intermediate-resolution framework, for simulating multicomponent condensates at near-cellular complexity.</p>
@@ -77,6 +87,8 @@
           <a href="https://doi.org/10.64898/2026.09.15.751913" target="_blank" rel="noopener">bioRxiv 2026</a>
           <a href="https://github.com/lslumass/HyresBuilder" target="_blank" rel="noopener">Setup tools</a>
         </div>
+        </div>
+        <figure class="card-fig"><img src="images/models/hyres_icon.jpg" alt="Proteins, nucleic acids and small molecules in one framework, combined with MD and machine learning" loading="lazy"></figure>
       </article>
     </div>
 
