@@ -199,7 +199,7 @@
   .nav ul a[aria-current="page"] { color: var(--accent); }
   .page-top { padding-top: 48px; }
   .home-summary { padding: 56px 0; border-bottom: 1px solid var(--line); }
-  .home-text { max-width: 52em; }
+  .home-text { max-width: none; }
   .home-text p { margin-bottom: 14px; font-size: 1.02rem; }
   .home-figs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 30px; }
   .home-figs a { display: flex; align-items: center; justify-content: center; background: var(--figure-bg); border: 1px solid var(--line); border-radius: 12px; padding: 14px; height: 230px; }
@@ -208,3 +208,11 @@
   .home-overview img { width: 100%; }
   .home-figs img { max-height: 200px; width: auto; max-width: 100%; }
   @media (max-width: 820px) { .home-figs { grid-template-columns: 1fr; } }
+
+  /* Justified body text */
+  .home-text p, .lede, .theme p:not(.key), .db-text p, .card p {
+    text-align: justify; hyphens: auto; -webkit-hyphens: auto;
+  }
+  @media (max-width: 640px) {
+    .home-text p, .lede, .theme p:not(.key), .db-text p, .card p { text-align: left; }
+  }
