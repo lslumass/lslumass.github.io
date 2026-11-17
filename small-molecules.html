@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iCon Small Molecules — Shanlong Li</title>
+<meta name="description" content="Shanlong Li, postdoctoral researcher at UMass Amherst, develops physics-based multiscale models, integrated with machine learning, to study biomolecular condensates, amyloid fibrils, and polymer self-assembly.">
+<meta property="og:title" content="iCon Small Molecules — Shanlong Li">
+<meta property="og:description" content="Physics-based multiscale modeling, integrated with machine learning, of how biomolecules and polymers organize, from large complexes to self-assembly, phase separation, and aggregation.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://lslumass.github.io/small-molecules.html">
+<meta property="og:image" content="https://lslumass.github.io/images/profile.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+
+<nav class="nav" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="index.html">Shanlong Li</a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="collaborations.html">Sim × Exp</a></li>
+      <li><a href="models.html" aria-current="page">Models</a></li>
+      <li><a href="database.html">Database</a></li>
+      <li><a href="publications.html">Publications</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+
+<section id="small-molecules" class="page-top">
+  <div class="wrap">
+    <p class="eyebrow"><a href="models.html">Models</a> / HyRes/iCon</p>
+    <h2>iCon small molecules</h2>
+    <p class="lede">Cells are full of metabolites that condensates concentrate or exclude, and that can in turn drive or regulate phase separation. To bring them into the HyRes/iCon framework, we built iConMapper, a machine-learning tool that maps any small molecule onto the HyRes/iConNA bead scheme, and used it to construct iConMetabolome, a growing library of coarse-grained metabolite models that run alongside proteins and nucleic acids in <a href="https://github.com/lslumass/HyresBuilder" target="_blank" rel="noopener">HyresBuilder</a>.</p>
+    <div class="actions sm-links">
+      <a href="https://doi.org/10.64898/2026.09.15.751913" target="_blank" rel="noopener">HyRes/iCon paper (bioRxiv 2026)</a>
+      <a href="https://github.com/lslumass/iConMapper" target="_blank" rel="noopener">iConMapper on GitHub</a>
+      <a href="https://github.com/lslumass/iConMetabolome" target="_blank" rel="noopener">Training dataset on GitHub</a>
+    </div>
+
+    <div class="sm-block">
+      <div class="sm-text">
+        <span class="tag">Automated mapping</span>
+        <h3>iConMapper</h3>
+        <p>iConMapper reads a molecule as a graph of atoms and bonds and predicts both how its atoms group into coarse-grained beads and which iCon bead type each bead should be. It is the deep supervised graph partitioning model with type prediction (DSGPM-TP), retrained on about 1,000 metabolites from the Human Metabolome Database that we labeled by hand following the HyRes and iConNA conventions.</p>
+        <ul class="sm-stats">
+          <li><strong>0.86</strong><span>F1 score, bead mapping</span></li>
+          <li><strong>0.80</strong><span>F1 score, bead type</span></li>
+          <li><strong>~1,000</strong><span>hand-labeled training molecules</span></li>
+        </ul>
+      </div>
+      <figure class="sm-fig"><img src="images/smallmol/iconmapper_workflow.jpg" alt="iConMapper workflow: a nicotinamide graph is passed through the DSGPM-TP network, which outputs its coarse-grained beads and types" loading="lazy"></figure>
+    </div>
+
+    <h3 class="sm-sub">From SMILES to a simulation-ready model</h3>
+    <ol class="sm-steps">
+      <li><strong>Map.</strong> iConMapper turns a SMILES string into a coarse-grained structure, mapping scheme, and bead types.</li>
+      <li><strong>Simulate.</strong> A 500 ns all-atom simulation of the molecule (GROMACS with OpenFF or GAFF2) provides reference distributions of bonds, angles, and dihedrals.</li>
+      <li><strong>Fit.</strong> Bonded parameters are fit to those distributions and written to a parameter file that HyresBuilder loads directly.</li>
+    </ol>
+    <p class="sm-note">The pipeline is fully automated, but checking the mapping and the fitted distributions by eye is recommended before production runs.</p>
+
+    <pre class="sm-code"><code>python MappingPrediction.py --smiles "&lt;SMILES&gt;" --name ATP --labels</code></pre>
+
+    <div class="sm-gallery">
+      <figure><img src="images/smallmol/mapper_atp.jpg" alt="iConMapper bead mapping of ATP, with each bead shaded in its own color" loading="lazy"><figcaption>ATP</figcaption></figure>
+      <figure><img src="images/smallmol/mapper_style1.jpg" alt="iConMapper bead mapping of a steroid drawn as colored bead regions" loading="lazy"><figcaption>Steroid, bead style</figcaption></figure>
+      <figure><img src="images/smallmol/mapper_style2.jpg" alt="The same steroid mapping drawn as colored ellipses" loading="lazy"><figcaption>Steroid, circle style</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="library">
+  <div class="wrap">
+    <p class="eyebrow">Library</p>
+    <h2>iConMetabolome</h2>
+    <div class="sm-block sm-block-lib">
+      <div class="sm-text">
+        <p>The library currently holds 88 parameterized metabolites, from amino acid derivatives and nucleotides to cofactors and TCA-cycle intermediates, and new molecules are added as they are parameterized. Each is shown below with its residue name in HyresBuilder, Select a molecule to see its bead mapping, drawn in iConMapper’s style so that each colored region is one bead, along with its bead types.</p>
+        <p>In the HyRes/iCon paper, iConMetabolome reproduces ATP-driven phase separation of protamine, including both its lower and upper critical concentrations, and the experimental trend of how 15 metabolites partition into SH3/PRM condensates (r ≈ 0.89).</p>
+        <label class="lib-search"><span>Search the library</span><input type="search" id="lib-q" placeholder="Name or residue code, e.g. ATP"></label>
+        <p class="lib-empty" id="lib-empty" hidden>No metabolites match.</p>
+      </div>
+      <figure class="sm-fig sm-fig-tall"><img src="images/smallmol/library_subset.jpg" alt="A representative set of iConMetabolome molecules, with their coarse-grained beads shaded; charged beads are highlighted" loading="lazy"><figcaption>Representative library members, with charged beads highlighted in color.</figcaption></figure>
+    </div>
+
+    <div class="lib-groups" id="lib">
+      <div class="lib-group">
+        <h4>Amino acid derivatives <span class="count">26</span></h4>
+        <ul class="mol-grid">
+          <li class="mol"><button type="button" class="mol-btn" data-name="N6-Acetyl-L-lysine" data-code="ALY" data-beads="4" data-charge="0" data-types="M02 QdK A1L M03" data-img="images/smallmol/mol/ALY.svg"><span class="mol-name">N6-Acetyl-L-lysine</span><span class="mol-meta"><code>ALY</code><span>4 beads · 0</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="N-Acetylalanine" data-code="AYA" data-beads="3" data-charge="−1" data-types="M03 C3E M02" data-img="images/smallmol/mol/AYA.svg"><span class="mol-name">N-Acetylalanine</span><span class="mol-meta"><code>AYA</code><span>3 beads · −1</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="Acetylcarnitine" data-code="ACA" data-beads="4" data-charge="0" data-types="M06 A2V M02 M07" data-img="images/smallmol/mol/ACA.svg"><span class="mol-name">Acetylcarnitine</span><span class="mol-meta"><code>ACA</code><span>4 beads · 0</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="N-Acetylglutamate" data-code="NLG" data-beads="4" data-charge="−2" data-types="M03 A2V M02 M02" data-img="images/smallmol/mol/NLG.svg"><span class="mol-name">N-Acetylglutamate</span><span class="mol-meta"><code>NLG</code><span>4 beads · −2</span></span></button></li>
+          <li class="mol mol-pending"><div class="mol-btn"><span class="mol-name">N-Acetylglutamine</span><span class="mol-meta"><code>NLQ</code><span>4 beads · −1</span><span class="mol-soon">drawing coming soon</span></span></div></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="N-Acetylornithine" data-code="AOR" data-beads="4" data-charge="0" data-types="M02 A3K QdK M03" data-img="images/smallmol/mol/AOR.svg"><span class="mol-name">N-Acetylornithine</span><span class="mol-meta"><code>AOR</code><span>4 beads · 0</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="2-Aminoadipate" data-code="UN1" data-beads="4" data-charge="−1" data-types="M02 A2V A3K M02" data-img="images/smallmol/mol/UN1.svg"><span class="mol-name">2-Aminoadipate</span><span class="mol-meta"><code>UN1</code><span>4 beads · −1</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="Betaine" data-code="BET" data-beads="2" data-charge="0" data-types="M06 QaD" data-img="images/smallmol/mol/BET.svg"><span class="mol-name">Betaine</span><span class="mol-meta"><code>BET</code><span>2 beads · 0</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="C3-carnitine" data-code="C3C" data-beads="5" data-charge="0" data-types="C3E M07 A2V M02 M06" data-img="images/smallmol/mol/C3C.svg"><span class="mol-name">C3-carnitine</span><span class="mol-meta"><code>C3C</code><span>5 beads · 0</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="C4-carnitine" data-code="C4C" data-beads="5" data-charge="0" data-types="A2V M07 A2V M02 M06" data-img="images/smallmol/mol/C4C.svg"><span class="mol-name">C4-carnitine</span><span class="mol-meta"><code>C4C</code><span>5 beads · 0</span></span></button></li>
+          <li class="mol mol-pending"><div class="mol-btn"><span class="mol-name">C5-carnitine</span><span class="mol-meta"><code>C5C</code><span>5 beads · 0</span><span class="mol-soon">drawing coming soon</span></span></div></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="Carnitine" data-code="152" data-beads="3" data-charge="0" data-types="M06 P1T QaD" data-img="images/smallmol/mol/152.svg"><span class="mol-name">Carnitine</span><span class="mol-meta"><code>152</code><span>3 beads · 0</span></span></button></li>
+          <li class="mol mol-pending"><div class="mol-btn"><span class="mol-name">Choline</span><span class="mol-meta"><code>CHT</code><span>2 beads · +1</span><span class="mol-soon">drawing coming soon</span></span></div></li>
+          <li class="mol mol-pending"><div class="mol-btn"><span class="mol-name">Citrulline</span><span class="mol-meta"><code>CIT</code><span class="mol-soon">drawing coming soon</span></span></div></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="Creatine" data-code="CRN" data-beads="3" data-charge="0" data-types="M02 C3E QdR" data-img="images/smallmol/mol/CRN.svg"><span class="mol-name">Creatine</span><span class="mol-meta"><code>CRN</code><span>3 beads · 0</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="Cystathionine" data-code="CTT" data-beads="5" data-charge="0" data-types="M02 QdK P1C QdK M02" data-img="images/smallmol/mol/CTT.svg"><span class="mol-name">Cystathionine</span><span class="mol-meta"><code>CTT</code><span>5 beads · 0</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="Dimethylglycine" data-code="DMG" data-beads="2" data-charge="0" data-types="M02 M06" data-img="images/smallmol/mol/DMG.svg"><span class="mol-name">Dimethylglycine</span><span class="mol-meta"><code>DMG</code><span>2 beads · 0</span></span></button></li>
+          <li class="mol mol-pending"><div class="mol-btn"><span class="mol-name">GABA</span><span class="mol-meta"><code>ABU</code><span>3 beads · 0</span><span class="mol-soon">drawing coming soon</span></span></div></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="Glutathione (GSH)" data-code="GSH" data-beads="6" data-charge="−1" data-types="M02 M06 M03 M03 M02 P1C" data-img="images/smallmol/mol/GSH.svg"><span class="mol-name">Glutathione (GSH)</span><span class="mol-meta"><code>GSH</code><span>6 beads · −1</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="Glycerophosphocholine" data-code="CH5" data-beads="5" data-charge="0" data-types="P1S P1T RP C3E M06" data-img="images/smallmol/mol/CH5.svg"><span class="mol-name">Glycerophosphocholine</span><span class="mol-meta"><code>CH5</code><span>5 beads · 0</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="4-Hydroxyproline" data-code="HYP" data-beads="4" data-charge="0" data-types="M02 C3E QdK P1S" data-img="images/smallmol/mol/HYP.svg"><span class="mol-name">4-Hydroxyproline</span><span class="mol-meta"><code>HYP</code><span>4 beads · 0</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="1-Methylhistidine" data-code="HIC" data-beads="5" data-charge="0" data-types="M02 QdK A4H P2H P2H" data-img="images/smallmol/mol/HIC.svg"><span class="mol-name">1-Methylhistidine</span><span class="mol-meta"><code>HIC</code><span>5 beads · 0</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="Methylthioadenosine" data-code="MTA" data-beads="8" data-charge="0" data-types="P1C MS1 MS2 RA1 RA2 RA3 RA4 M05" data-img="images/smallmol/mol/MTA.svg"><span class="mol-name">Methylthioadenosine</span><span class="mol-meta"><code>MTA</code><span>8 beads · 0</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="Ornithine" data-code="ORN" data-beads="4" data-charge="+1" data-types="M02 QdK C3E QdK" data-img="images/smallmol/mol/ORN.svg"><span class="mol-name">Ornithine</span><span class="mol-meta"><code>ORN</code><span>4 beads · +1</span></span></button></li>
+          <li class="mol mol-pending"><div class="mol-btn"><span class="mol-name">Saccharopine</span><span class="mol-meta"><code>SHR</code><span>7 beads · −1</span><span class="mol-soon">drawing coming soon</span></span></div></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="Taurine" data-code="TAU" data-beads="2" data-charge="0" data-types="QdK MS1" data-img="images/smallmol/mol/TAU.svg"><span class="mol-name">Taurine</span><span class="mol-meta"><code>TAU</code><span>2 beads · 0</span></span></button></li>
+        </ul>
+      </div>
+      <div class="lib-group">
+        <h4>Nucleotides, nucleosides &amp; bases <span class="count">30</span></h4>
+        <ul class="mol-grid">
+          <li class="mol"><button type="button" class="mol-btn" data-name="Adenine" data-code="AD0" data-beads="4" data-charge="0" data-types="P1H RA2 RA3 RA4" data-img="images/smallmol/mol/AD0.svg"><span class="mol-name">Adenine</span><span class="mol-meta"><code>AD0</code><span>4 beads · 0</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="Adenosine" data-code="ADN" data-beads="8" data-charge="0" data-types="P1S MS1 MS2 RA1 RA2 RA3 RA4 M05" data-img="images/smallmol/mol/ADN.svg"><span class="mol-name">Adenosine</span><span class="mol-meta"><code>ADN</code><span>8 beads · 0</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="ADP" data-code="ADP" data-beads="9" data-charge="−3" data-types="M01 PHO MS1 MS2 RA1 RA2 RA3 RA4 M05" data-img="images/smallmol/mol/ADP.svg"><span class="mol-name">ADP</span><span class="mol-meta"><code>ADP</code><span>9 beads · −3</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="AMP" data-code="AMP" data-beads="8" data-charge="−2" data-types="M01 MS1 MS2 RA1 RA2 RA3 RA4 M05" data-img="images/smallmol/mol/AMP.svg"><span class="mol-name">AMP</span><span class="mol-meta"><code>AMP</code><span>8 beads · −2</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="ATP" data-code="ATP" data-beads="10" data-charge="−4" data-types="M01 PHO PHO MS1 MS2 RA1 RA2 RA3 RA4 M05" data-img="images/smallmol/mol/ATP.svg"><span class="mol-name">ATP</span><span class="mol-meta"><code>ATP</code><span>10 beads · −4</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="CMP" data-code="C5P" data-beads="7" data-charge="−2" data-types="M01 MS1 MS2 RC1 RC2 RC3 M05" data-img="images/smallmol/mol/C5P.svg"><span class="mol-name">CMP</span><span class="mol-meta"><code>C5P</code><span>7 beads · −2</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="Cytidine" data-code="CTN" data-beads="7" data-charge="0" data-types="P1S MS1 MS2 RC1 RC2 RC3 M05" data-img="images/smallmol/mol/CTN.svg"><span class="mol-name">Cytidine</span><span class="mol-meta"><code>CTN</code><span>7 beads · 0</span></span></button></li>
+          <li class="mol mol-pending"><div class="mol-btn"><span class="mol-name">dAMP</span><span class="mol-meta"><code>D5M</code><span>8 beads · −2</span><span class="mol-soon">drawing coming soon</span></span></div></li>
+          <li class="mol mol-pending"><div class="mol-btn"><span class="mol-name">dCMP</span><span class="mol-meta"><code>DCM</code><span>7 beads · −2</span><span class="mol-soon">drawing coming soon</span></span></div></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="Deoxyadenosine" data-code="3D1" data-beads="8" data-charge="0" data-types="P1S MS1 MS2 RA1 RA2 RA3 RA4 P1T" data-img="images/smallmol/mol/3D1.svg"><span class="mol-name">Deoxyadenosine</span><span class="mol-meta"><code>3D1</code><span>8 beads · 0</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="Deoxyguanosine" data-code="GNG" data-beads="8" data-charge="0" data-types="P1S MS1 MS2 RA1 RA2 RA3 RA4 P1T" data-img="images/smallmol/mol/GNG.svg"><span class="mol-name">Deoxyguanosine</span><span class="mol-meta"><code>GNG</code><span>8 beads · 0</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="Deoxyinosine" data-code="2ND" data-beads="8" data-charge="0" data-types="P1S MS1 MS2 RA1 RA2 RG3 RA4 P1T" data-img="images/smallmol/mol/2ND.svg"><span class="mol-name">Deoxyinosine</span><span class="mol-meta"><code>2ND</code><span>8 beads · 0</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="GMP" data-code="5GP" data-beads="8" data-charge="−2" data-types="M01 MS1 MS2 RG1 RG2 RG3 RG4 M05" data-img="images/smallmol/mol/5GP.svg"><span class="mol-name">GMP</span><span class="mol-meta"><code>5GP</code><span>8 beads · −2</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="Guanine" data-code="GUN" data-beads="4" data-charge="0" data-types="P1H RG1 RG3 RG4" data-img="images/smallmol/mol/GUN.svg"><span class="mol-name">Guanine</span><span class="mol-meta"><code>GUN</code><span>4 beads · 0</span></span></button></li>
+          <li class="mol mol-pending"><div class="mol-btn"><span class="mol-name">Guanosine</span><span class="mol-meta"><code>GRS</code><span>8 beads · 0</span><span class="mol-soon">drawing coming soon</span></span></div></li>
+          <li class="mol mol-pending"><div class="mol-btn"><span class="mol-name">Hypoxanthine</span><span class="mol-meta"><code>HPA</code><span class="mol-soon">drawing coming soon</span></span></div></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="Inosine" data-code="NOS" data-beads="8" data-charge="0" data-types="P1S MS1 MS2 RA1 RA2 RG3 RA4 M05" data-img="images/smallmol/mol/NOS.svg"><span class="mol-name">Inosine</span><span class="mol-meta"><code>NOS</code><span>8 beads · 0</span></span></button></li>
+          <li class="mol mol-pending"><div class="mol-btn"><span class="mol-name">7-Methylguanosine</span><span class="mol-meta"><code>MG7</code><span>8 beads · +1</span><span class="mol-soon">drawing coming soon</span></span></div></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="NAD+" data-code="NAD" data-beads="16" data-charge="−1" data-types="PHO PHO MS1 MS2 M05 M06 A2W A2W M04 MS1 MS2 RA1 RA2 RA3 RA4 M05" data-img="images/smallmol/mol/NAD.svg"><span class="mol-name">NAD+</span><span class="mol-meta"><code>NAD</code><span>16 beads · −1</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="NADH" data-code="NAI" data-beads="16" data-charge="−2" data-types="PHO PHO MS1 MS2 M05 P1H A2W A2W M04 MS1 MS2 RA1 RA2 RA3 RA4 M05" data-img="images/smallmol/mol/NAI.svg"><span class="mol-name">NADH</span><span class="mol-meta"><code>NAI</code><span>16 beads · −2</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="NADP+" data-code="NDP" data-beads="17" data-charge="−1" data-types="PHO PHO MS1 MS2 M05 M06 A2W A2W M04 MS1 MS2 RA1 RA2 RA3 RA4 M05 M01" data-img="images/smallmol/mol/NDP.svg"><span class="mol-name">NADP+</span><span class="mol-meta"><code>NDP</code><span>17 beads · −1</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="UDP" data-code="UDP" data-beads="8" data-charge="−3" data-types="M01 PHO MS1 MS2 RU1 RU2 RU3 M05" data-img="images/smallmol/mol/UDP.svg"><span class="mol-name">UDP</span><span class="mol-meta"><code>UDP</code><span>8 beads · −3</span></span></button></li>
+          <li class="mol mol-pending"><div class="mol-btn"><span class="mol-name">UDP-GlcNAc</span><span class="mol-meta"><code>UD1</code><span>12 beads · −2</span><span class="mol-soon">drawing coming soon</span></span></div></li>
+          <li class="mol mol-pending"><div class="mol-btn"><span class="mol-name">UDP-glucuronic acid</span><span class="mol-meta"><code>UGA</code><span>12 beads · −3</span><span class="mol-soon">drawing coming soon</span></span></div></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="UDP-hexose" data-code="UPG" data-beads="12" data-charge="−2" data-types="PHO PHO MS1 M05 M05 P1S MS1 MS2 RU1 RU2 RU3 M05" data-img="images/smallmol/mol/UPG.svg"><span class="mol-name">UDP-hexose</span><span class="mol-meta"><code>UPG</code><span>12 beads · −2</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="UMP" data-code="U5P" data-beads="7" data-charge="−2" data-types="M01 MS1 MS2 RU1 RU2 RU3 M05" data-img="images/smallmol/mol/U5P.svg"><span class="mol-name">UMP</span><span class="mol-meta"><code>U5P</code><span>7 beads · −2</span></span></button></li>
+          <li class="mol mol-pending"><div class="mol-btn"><span class="mol-name">Uracil</span><span class="mol-meta"><code>U0</code><span>3 beads · 0</span><span class="mol-soon">drawing coming soon</span></span></div></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="Uridine" data-code="URI" data-beads="7" data-charge="0" data-types="P1S MS1 MS2 RU1 RU2 RU3 M05" data-img="images/smallmol/mol/URI.svg"><span class="mol-name">Uridine</span><span class="mol-meta"><code>URI</code><span>7 beads · 0</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="Xanthine" data-code="XAN" data-beads="4" data-charge="0" data-types="P1H RG1 RG3 RG3" data-img="images/smallmol/mol/XAN.svg"><span class="mol-name">Xanthine</span><span class="mol-meta"><code>XAN</code><span>4 beads · 0</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="Xanthosine" data-code="4UO" data-beads="8" data-charge="0" data-types="P1S MS1 MS2 RG1 RG2 RG3 RG3 M05" data-img="images/smallmol/mol/4UO.svg"><span class="mol-name">Xanthosine</span><span class="mol-meta"><code>4UO</code><span>8 beads · 0</span></span></button></li>
+        </ul>
+      </div>
+      <div class="lib-group">
+        <h4>Cofactors &amp; vitamins <span class="count">7</span></h4>
+        <ul class="mol-grid">
+          <li class="mol"><button type="button" class="mol-btn" data-name="Biotin" data-code="BTN" data-beads="5" data-charge="−1" data-types="M02 A2V C3E C3E M08" data-img="images/smallmol/mol/BTN.svg"><span class="mol-name">Biotin</span><span class="mol-meta"><code>BTN</code><span>5 beads · −1</span></span></button></li>
+          <li class="mol mol-pending"><div class="mol-btn"><span class="mol-name">Coenzyme A</span><span class="mol-meta"><code>COA</code><span>15 beads · −2</span><span class="mol-soon">drawing coming soon</span></span></div></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="FAD" data-code="FAD" data-beads="18" data-charge="−2" data-types="PHO PHO P1T P1S P1T P1H A1W A1W P1H RG3 RG3 MS1 MS2 RA1 RA2 RA3 RA4 M05" data-img="images/smallmol/mol/FAD.svg"><span class="mol-name">FAD</span><span class="mol-meta"><code>FAD</code><span>18 beads · −2</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="Nicotinamide" data-code="NCA" data-beads="4" data-charge="0" data-types="P1H P1W A1W M04" data-img="images/smallmol/mol/NCA.svg"><span class="mol-name">Nicotinamide</span><span class="mol-meta"><code>NCA</code><span>4 beads · 0</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="Pantothenic acid" data-code="PAU" data-beads="5" data-charge="−1" data-types="P1S A2V P1S M03 QaD" data-img="images/smallmol/mol/PAU.svg"><span class="mol-name">Pantothenic acid</span><span class="mol-meta"><code>PAU</code><span>5 beads · −1</span></span></button></li>
+          <li class="mol mol-pending"><div class="mol-btn"><span class="mol-name">Riboflavin</span><span class="mol-meta"><code>RBF</code><span>10 beads · 0</span><span class="mol-soon">drawing coming soon</span></span></div></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="Thiamine (vitamin B1)" data-code="VIB" data-beads="7" data-charge="+1" data-types="P1T A2V C3E QdK A1F RC1 RG4" data-img="images/smallmol/mol/VIB.svg"><span class="mol-name">Thiamine (vitamin B1)</span><span class="mol-meta"><code>VIB</code><span>7 beads · +1</span></span></button></li>
+        </ul>
+      </div>
+      <div class="lib-group">
+        <h4>Carbohydrates <span class="count">3</span></h4>
+        <ul class="mol-grid">
+          <li class="mol"><button type="button" class="mol-btn" data-name="Glucose 6-phosphate" data-code="G6P" data-beads="4" data-charge="−2" data-types="M01 MS1 M05 M05" data-img="images/smallmol/mol/G6P.svg"><span class="mol-name">Glucose 6-phosphate</span><span class="mol-meta"><code>G6P</code><span>4 beads · −2</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="Glycerol-3-phosphate" data-code="G3P" data-beads="3" data-charge="−2" data-types="P1S P1T M01" data-img="images/smallmol/mol/G3P.svg"><span class="mol-name">Glycerol-3-phosphate</span><span class="mol-meta"><code>G3P</code><span>3 beads · −2</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="3-Phosphoglycerate" data-code="3PG" data-beads="3" data-charge="−3" data-types="M01 P1T M02" data-img="images/smallmol/mol/3PG.svg"><span class="mol-name">3-Phosphoglycerate</span><span class="mol-meta"><code>3PG</code><span>3 beads · −3</span></span></button></li>
+        </ul>
+      </div>
+      <div class="lib-group">
+        <h4>TCA cycle <span class="count">7</span></h4>
+        <ul class="mol-grid">
+          <li class="mol mol-pending"><div class="mol-btn"><span class="mol-name">cis-Aconitate</span><span class="mol-meta"><code>TRA</code><span>4 beads · −3</span><span class="mol-soon">drawing coming soon</span></span></div></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="Fumarate" data-code="FUM" data-beads="3" data-charge="−2" data-types="M02 C3E M02" data-img="images/smallmol/mol/FUM.svg"><span class="mol-name">Fumarate</span><span class="mol-meta"><code>FUM</code><span>3 beads · −2</span></span></button></li>
+          <li class="mol mol-pending"><div class="mol-btn"><span class="mol-name">2-Hydroxyglutarate</span><span class="mol-meta"><code>2HG</code><span>4 beads · −2</span><span class="mol-soon">drawing coming soon</span></span></div></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="α-Ketoglutarate" data-code="AKG" data-beads="4" data-charge="−2" data-types="M02 C3E C3E M02" data-img="images/smallmol/mol/AKG.svg"><span class="mol-name">α-Ketoglutarate</span><span class="mol-meta"><code>AKG</code><span>4 beads · −2</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="Malate" data-code="LMR" data-beads="3" data-charge="−2" data-types="M02 P1T M02" data-img="images/smallmol/mol/LMR.svg"><span class="mol-name">Malate</span><span class="mol-meta"><code>LMR</code><span>3 beads · −2</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="Methylcitrate" data-code="MCT" data-beads="5" data-charge="−3" data-types="M02 P1T C3E M02 M02" data-img="images/smallmol/mol/MCT.svg"><span class="mol-name">Methylcitrate</span><span class="mol-meta"><code>MCT</code><span>5 beads · −3</span></span></button></li>
+          <li class="mol mol-pending"><div class="mol-btn"><span class="mol-name">Succinate</span><span class="mol-meta"><code>SIN</code><span>3 beads · −2</span><span class="mol-soon">drawing coming soon</span></span></div></li>
+        </ul>
+      </div>
+      <div class="lib-group">
+        <h4>Bile acids <span class="count">2</span></h4>
+        <ul class="mol-grid">
+          <li class="mol"><button type="button" class="mol-btn" data-name="Cholic acid" data-code="CHD" data-beads="10" data-charge="−1" data-types="P1T C3E A2V P1T C3E P1T A2V A2V A2V QaD" data-img="images/smallmol/mol/CHD.svg"><span class="mol-name">Cholic acid</span><span class="mol-meta"><code>CHD</code><span>10 beads · −1</span></span></button></li>
+          <li class="mol mol-pending"><div class="mol-btn"><span class="mol-name">Deoxycholic acid</span><span class="mol-meta"><code>DXC</code><span>10 beads · −1</span><span class="mol-soon">drawing coming soon</span></span></div></li>
+        </ul>
+      </div>
+      <div class="lib-group">
+        <h4>Other metabolites <span class="count">13</span></h4>
+        <ul class="mol-grid">
+          <li class="mol"><button type="button" class="mol-btn" data-name="N-Acetylputrescine" data-code="X5A" data-beads="3" data-charge="+1" data-types="M03 A3K QdK" data-img="images/smallmol/mol/X5A.svg"><span class="mol-name">N-Acetylputrescine</span><span class="mol-meta"><code>X5A</code><span>3 beads · +1</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="S-Adenosylmethionine" data-code="SAM" data-beads="10" data-charge="+1" data-types="M06 QdK M02 MS1 MS2 RA1 RA2 RA3 RA4 M05" data-img="images/smallmol/mol/SAM.svg"><span class="mol-name">S-Adenosylmethionine</span><span class="mol-meta"><code>SAM</code><span>10 beads · +1</span></span></button></li>
+          <li class="mol mol-pending"><div class="mol-btn"><span class="mol-name">Allantoate</span><span class="mol-meta"><code>1AL</code><span>3 beads · −1</span><span class="mol-soon">drawing coming soon</span></span></div></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="Dihydroxyacetone phosphate" data-code="13P" data-beads="3" data-charge="−2" data-types="P1S A2V M01" data-img="images/smallmol/mol/13P.svg"><span class="mol-name">Dihydroxyacetone phosphate</span><span class="mol-meta"><code>13P</code><span>3 beads · −2</span></span></button></li>
+          <li class="mol mol-pending"><div class="mol-btn"><span class="mol-name">Flavone</span><span class="mol-meta"><code>FLN</code><span>8 beads · 0</span><span class="mol-soon">drawing coming soon</span></span></div></li>
+          <li class="mol mol-pending"><div class="mol-btn"><span class="mol-name">Indole-3-carboxylic acid</span><span class="mol-meta"><code>ICO</code><span>6 beads · −1</span><span class="mol-soon">drawing coming soon</span></span></div></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="2-Ketoisovalerate" data-code="KIV" data-beads="3" data-charge="−1" data-types="M02 RC3 A2V" data-img="images/smallmol/mol/KIV.svg"><span class="mol-name">2-Ketoisovalerate</span><span class="mol-meta"><code>KIV</code><span>3 beads · −1</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="Malonic acid" data-code="MLA" data-beads="2" data-charge="−2" data-types="M02 QaD" data-img="images/smallmol/mol/MLA.svg"><span class="mol-name">Malonic acid</span><span class="mol-meta"><code>MLA</code><span>2 beads · −2</span></span></button></li>
+          <li class="mol mol-pending"><div class="mol-btn"><span class="mol-name">Phenyllactic acid</span><span class="mol-meta"><code>HFA</code><span>5 beads · −1</span><span class="mol-soon">drawing coming soon</span></span></div></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="Phenylpyruvate" data-code="PPY" data-beads="5" data-charge="−1" data-types="M02 RC3 A1F A2F A3F" data-img="images/smallmol/mol/PPY.svg"><span class="mol-name">Phenylpyruvate</span><span class="mol-meta"><code>PPY</code><span>5 beads · −1</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="Phosphoenolpyruvate" data-code="PEP" data-beads="3" data-charge="−3" data-types="M01 C3E M02" data-img="images/smallmol/mol/PEP.svg"><span class="mol-name">Phosphoenolpyruvate</span><span class="mol-meta"><code>PEP</code><span>3 beads · −3</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="2-Phosphoglycerate" data-code="2PG" data-beads="3" data-charge="−3" data-types="M01 P1T M02" data-img="images/smallmol/mol/2PG.svg"><span class="mol-name">2-Phosphoglycerate</span><span class="mol-meta"><code>2PG</code><span>3 beads · −3</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn" data-name="Phosphorylcholine" data-code="PC" data-beads="3" data-charge="−1" data-types="M01 C3E M06" data-img="images/smallmol/mol/PC.svg"><span class="mol-name">Phosphorylcholine</span><span class="mol-meta"><code>PC</code><span>3 beads · −1</span></span></button></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<dialog class="mol-dlg" id="mol-dlg" aria-labelledby="mol-dlg-title">
+  <button type="button" class="mol-close" aria-label="Close">×</button>
+  <div class="mol-dlg-img"><img id="mol-dlg-img" src="" alt=""></div>
+  <h3 id="mol-dlg-title"></h3>
+  <p class="mol-dlg-meta" id="mol-dlg-meta"></p>
+  <p class="mol-dlg-types-h">Bead types</p>
+  <ul class="mol-dlg-types" id="mol-dlg-types"></ul>
+</dialog>
+
+<script>
+(function () {
+  var q = document.getElementById('lib-q'), empty = document.getElementById('lib-empty');
+  var groups = document.querySelectorAll('.lib-group');
+  q.addEventListener('input', function () {
+    var t = q.value.trim().toLowerCase(), any = false;
+    groups.forEach(function (g) {
+      var n = 0;
+      g.querySelectorAll('.mol').forEach(function (li) {
+        var hit = !t || li.textContent.toLowerCase().indexOf(t) !== -1;
+        li.hidden = !hit; if (hit) n++;
+      });
+      g.hidden = n === 0; if (n) any = true;
+    });
+    empty.hidden = any;
+  });
+
+  var dlg = document.getElementById('mol-dlg');
+  if (!dlg || !dlg.showModal) return;
+  document.querySelectorAll('button.mol-btn').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var d = b.dataset;
+      document.getElementById('mol-dlg-img').src = d.img;
+      document.getElementById('mol-dlg-img').alt = 'Bead mapping of ' + d.name;
+      document.getElementById('mol-dlg-title').textContent = d.name;
+      document.getElementById('mol-dlg-meta').textContent = 'Residue ' + d.code + ' · ' + d.beads + ' beads · net charge ' + d.charge;
+      var ul = document.getElementById('mol-dlg-types'); ul.textContent = '';
+      d.types.split(' ').forEach(function (t) { var li = document.createElement('li'); li.textContent = t; ul.appendChild(li); });
+      dlg.showModal();
+    });
+  });
+  dlg.querySelector('.mol-close').addEventListener('click', function () { dlg.close(); });
+  dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+})();
+</script>
+
+</main>
+
+<footer>
+  <div class="wrap">© 2026 Shanlong Li · University of Massachusetts Amherst</div>
+</footer>
+</body>
+</html>
