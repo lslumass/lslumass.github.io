@@ -66,6 +66,7 @@
   .hero h1 { font-family: var(--serif); font-weight: 600; font-size: 2.6rem; line-height: 1.15; letter-spacing: -.01em; }
   .hero .tagline { font-family: var(--serif); font-size: 1.3rem; color: var(--text); margin: 10px 0 8px; line-height: 1.4; max-width: 34em; }
   .hero .role { color: var(--muted); font-size: .98rem; }
+  .hero .welcome { font-family: var(--serif); font-style: italic; font-size: 1.05rem; color: var(--accent); margin-bottom: 4px; }
   .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
   .btn {
     display: inline-flex; align-items: center; gap: 7px;
