@@ -171,6 +171,8 @@
 
   /* Contact */
   .contact-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+  .office { font-style: normal; margin-top: 28px; color: var(--muted); line-height: 1.6; }
+  .office-label { display: block; font-size: .78rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
 
   footer { padding: 32px 0 48px; color: var(--muted); font-size: .88rem; }
 
