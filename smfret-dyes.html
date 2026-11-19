@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>smFRET Dyes — Shanlong Li</title>
+<meta name="description" content="Shanlong Li, postdoctoral researcher at UMass Amherst, develops physics-based multiscale models, integrated with machine learning, to study biomolecular condensates, amyloid fibrils, and polymer self-assembly.">
+<meta property="og:title" content="smFRET Dyes — Shanlong Li">
+<meta property="og:description" content="Physics-based multiscale modeling, integrated with machine learning, of how biomolecules and polymers organize, from large complexes to self-assembly, phase separation, and aggregation.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://lslumass.github.io/smfret-dyes.html">
+<meta property="og:image" content="https://lslumass.github.io/images/profile.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css?v=20261119b">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="images/icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+</head>
+<body>
+
+<nav class="nav" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="index.html">Shanlong Li</a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="collaborations.html">Sim × Exp</a></li>
+      <li><a href="models.html" aria-current="page">Models</a></li>
+      <li><a href="database.html">Database</a></li>
+      <li><a href="publications.html">Publications</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+
+<section id="smfret-dyes" class="page-top">
+  <div class="wrap">
+    <p class="eyebrow"><a href="models.html">Models</a> / HyRes/iCon</p>
+    <h2>smFRET dyes</h2>
+    <p class="lede">Single-molecule FRET reports distances and dynamics through dyes attached to the molecule of interest, and the dyes themselves can interact with proteins and nucleic acids. To simulate labeled molecules directly, we built intermediate-resolution models of four common smFRET dyes that run with HyRes and iCon in <a href="https://github.com/lslumass/HyresBuilder" target="_blank" rel="noopener">HyresBuilder</a>.</p>
+
+    <div class="sm-block">
+      <div class="sm-text">
+        <span class="tag">Dye models</span>
+        <h3>Attached through their linkers</h3>
+        <p>Alexa Fluor 488, Alexa Fluor 594, Cy3B and CF660R are each modeled with their maleimide linker and attach to the side-chain CB bead of a cysteine, which keeps its standard HyRes parameters. Alexa Fluor 488 and 594 also come in nucleic-acid versions, linked at the 3′ oxygen and the 5′ phosphate, so dye-labeled proteins and RNA/DNA can be simulated alongside smFRET experiments.</p>
+        <p>Select a dye below to see its bead mapping, drawn in the same style as the iCon small molecules so that each colored region is one bead.</p>
+      </div>
+      <figure class="sm-fig"><img src="images/dyes/A48.svg" alt="Bead mapping of Alexa Fluor 488 attached to a cysteine through its maleimide linker" loading="lazy"><figcaption>Alexa Fluor 488 on cysteine (A48); the gray bead is the HyRes cysteine side chain.</figcaption></figure>
+    </div>
+
+    <div class="lib-groups">
+      <div class="lib-group">
+        <h4>On proteins, via cysteine <span class="count">4</span></h4>
+        <ul class="mol-grid">
+          <li class="mol"><button type="button" class="mol-btn dye-btn" data-code="A48" data-name="Alexa Fluor 488 on cysteine" data-beads="17" data-charge="−2" data-site="cys"><span class="mol-name">Alexa Fluor 488</span><span class="mol-meta"><code>A48</code><span>17 beads · −2</span></span><span class="mol-meta"><span>Cys CB bead</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn dye-btn" data-code="A59" data-name="Alexa Fluor 594 on cysteine" data-beads="23" data-charge="−2" data-site="cys"><span class="mol-name">Alexa Fluor 594</span><span class="mol-meta"><code>A59</code><span>23 beads · −2</span></span><span class="mol-meta"><span>Cys CB bead</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn dye-btn" data-code="C3B" data-name="Cy3B on cysteine" data-beads="19" data-charge="0" data-site="cys"><span class="mol-name">Cy3B</span><span class="mol-meta"><code>C3B</code><span>19 beads · 0</span></span><span class="mol-meta"><span>Cys CB bead</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn dye-btn" data-code="C66" data-name="CF660R on cysteine" data-beads="24" data-charge="−1" data-site="cys"><span class="mol-name">CF660R</span><span class="mol-meta"><code>C66</code><span>24 beads · −1</span></span><span class="mol-meta"><span>Cys CB bead</span></span></button></li>
+        </ul>
+      </div>
+      <div class="lib-group">
+        <h4>On nucleic acids <span class="count">2</span></h4>
+        <ul class="mol-grid">
+          <li class="mol"><button type="button" class="mol-btn dye-btn" data-code="R48" data-name="Alexa Fluor 488 on a nucleic acid 3′ end" data-beads="15" data-charge="−2" data-site="na"><span class="mol-name">Alexa Fluor 488</span><span class="mol-meta"><code>R48</code><span>15 beads · −2</span></span><span class="mol-meta"><span>3′ oxygen</span></span></button></li>
+          <li class="mol"><button type="button" class="mol-btn dye-btn" data-code="R59" data-name="Alexa Fluor 594 on a nucleic acid 5′ end" data-beads="25" data-charge="−2" data-site="na"><span class="mol-name">Alexa Fluor 594</span><span class="mol-meta"><code>R59</code><span>25 beads · −2</span></span><span class="mol-meta"><span>5′ phosphate</span></span></button></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<dialog class="mol-dlg dye-dlg" id="dye-dlg" aria-labelledby="dye-dlg-title">
+  <button type="button" class="mol-close" aria-label="Close">×</button>
+  <div class="mol-dlg-img"><img id="dye-dlg-img" src="" alt=""></div>
+  <h3 id="dye-dlg-title"></h3>
+  <p class="mol-dlg-meta" id="dye-dlg-meta"></p>
+  <p class="dye-note" id="dye-dlg-note"></p>
+</dialog>
+
+<script>
+(function () {
+  var dlg = document.getElementById('dye-dlg');
+  if (!dlg || !dlg.showModal) return;
+  var notes = {
+    cys: 'Each color is one bead. The gray bead is the HyRes cysteine side chain (CB) that the dye attaches to; the cysteine backbone is drawn without beads.',
+    na: 'Each color is one bead. Atoms drawn without beads belong to the nucleic acid, which uses its iCon model.'
+  };
+  document.querySelectorAll('.dye-btn').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var d = b.dataset, img = document.getElementById('dye-dlg-img');
+      img.src = 'images/dyes/' + d.code + '.svg';
+      img.alt = 'Bead mapping of ' + d.name;
+      document.getElementById('dye-dlg-title').textContent = d.name;
+      document.getElementById('dye-dlg-meta').textContent = 'Residue ' + d.code + ' · ' + d.beads + ' beads · net charge ' + d.charge;
+      document.getElementById('dye-dlg-note').textContent = notes[d.site];
+      dlg.showModal();
+    });
+  });
+  dlg.querySelector('.mol-close').addEventListener('click', function () { dlg.close(); });
+  dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+})();
+</script>
+
+</main>
+
+<footer>
+  <div class="wrap">© 2026 Shanlong Li · University of Massachusetts Amherst</div>
+</footer>
+</body>
+</html>

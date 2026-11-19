@@ -288,6 +288,9 @@
   .mol-dlg-types li { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .8rem; padding: 1px 8px; }
   .mol-close { position: absolute; top: 10px; right: 12px; width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--text); font-size: 1.2rem; line-height: 1; cursor: pointer; }
   .mol-close:hover { border-color: var(--accent); color: var(--accent); }
+  .dye-dlg { width: min(860px, calc(100vw - 32px)); }
+  .dye-dlg .mol-dlg-img { aspect-ratio: 2 / 1; }
+  .dye-note { color: var(--muted); font-size: .88rem; }
   @media (max-width: 820px) {
     .sm-block { grid-template-columns: 1fr; }
     .sm-fig { max-width: 420px; }
